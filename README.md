@@ -1,5 +1,1 @@
-railsgirls-2014
-===============
-
-Base repository for RailsGirls Budapest 2014
->_<
+Rails Girls Budapest 2014.03.22 sample app

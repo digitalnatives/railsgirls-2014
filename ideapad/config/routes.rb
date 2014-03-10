@@ -1,6 +1,7 @@
 Ideapad::Application.routes.draw do
   resources :ideas
 
+  root to: 'ideas#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

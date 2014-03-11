@@ -9,4 +9,9 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :ideas
+
+  def email_md5
+    Digest::MD5.hexdigest(self.email)
+  end
+
 end

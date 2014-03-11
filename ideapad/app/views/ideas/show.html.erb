@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <p>By:</p>
+  <%= @idea.user.try(:email) %>
+</p>
+
+<p>
   <b>Title:</b>
   <%= @idea.title %>
 </p>

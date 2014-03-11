@@ -8,6 +8,7 @@
   <tr>
     <th>Title</th>
     <th>Description</th>
+    <th>By</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
   <tr>
     <td><%= idea.title %></td>
     <td><%= idea.description %></td>
+    <td><%= idea.user.try(:email) %></td>
     <td><%= link_to 'Show', idea %></td>
     <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
     <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>

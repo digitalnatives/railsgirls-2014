@@ -14,7 +14,7 @@
   <tr>
     <td><%= idea.title %></td>
     <td><%= idea.description %></td>
-    <td><%= idea.user.try(:email) %></td>
+    <td><%= creator_unicorn_img(idea) %></td>
     <td><%= link_to 'Show', idea %></td>
 
     <% if idea.created_by?(current_user) %>

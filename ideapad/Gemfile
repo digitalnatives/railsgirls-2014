@@ -7,6 +7,8 @@ gem 'rails', '3.2.17'
 
 gem 'sqlite3', group: [:development, :test]
 
+gem 'letter_opener_web', group: :development
+
 group :production do
   gem 'thin'
   gem 'pg'

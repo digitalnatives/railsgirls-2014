@@ -13,5 +13,8 @@
   <%= @idea.description %>
 </p>
 
-<%= link_to 'Edit', edit_idea_path(@idea), class: "btn btn-default btn-lg", role: "button" %>
+<% if @idea.created_by?(current_user) %>
+  <%= link_to 'Edit', edit_idea_path(@idea), class: "btn btn-default btn-lg", role: "button" %>
+<% end %>
+
 <%= link_to 'Back', ideas_path, class: "btn btn-default btn-lg", role: "button" %>

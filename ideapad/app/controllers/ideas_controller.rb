@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_creator, only: [:edit, :update, :destroy]
 
   # GET /ideas
   # GET /ideas.json
@@ -84,4 +85,14 @@ class IdeasController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def check_creator
+    @idea = Idea.find(params[:id])
+    unless @idea.created_by?(current_user)
+      redirect_to root_path, alert: "You cannot mess with someone else's idea!"
+    end
+  end
+
 end

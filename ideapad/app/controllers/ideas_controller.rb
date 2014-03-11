@@ -44,6 +44,8 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
 
+    @idea.user = current_user
+
     respond_to do |format|
       if @idea.save
         format.html { redirect_to @idea, notice: 'Idea was successfully created.' }

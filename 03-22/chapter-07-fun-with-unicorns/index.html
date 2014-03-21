@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hetedik fejezet - Meseország - Rails Girls Budapest</title>
+  <meta name="author" content="Rails Girls">
+
+  
+  <meta name="description" content="Lazításképpen a nap végére még egy apró feladatunk maradt: ez pedig az, hogy kicsit egyedibbé, könnyebben felismerhetővé tegyük a felhasználóinkat.
+A &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://digitalnatives.github.io/03-22/chapter-07-fun-with-unicorns/">
+  <link href="/railsgirls-2014/favicon.png" rel="icon">
+  <link href="/railsgirls-2014/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/railsgirls-2014/javascripts/modernizr-2.0.js"></script>
+  <script src="/railsgirls-2014/javascripts/ender.js"></script>
+  <script src="/railsgirls-2014/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/railsgirls-2014/atom.xml" rel="alternate" title="Rails Girls Budapest" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <img class="logo" src="/railsgirls-2014/images/rg-budapest.jpg" />
+  <h1><a href="/railsgirls-2014/">Rails Girls Budapest</a></h1>
+</hgroup>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Hetedik Fejezet - Meseország</h1>
+    
+  </header>
+
+
+
+
+
+<div class="entry-content"><p>Lazításképpen a nap végére még egy apró feladatunk maradt: ez pedig az, hogy kicsit egyedibbé, könnyebben felismerhetővé tegyük a felhasználóinkat.
+A fejezet célja, hogy minden felhasználóhoz meg tudjuk jeleníteni egy egyedi képet, egy úgynevezett avatart.</p>
+
+<!-- more -->
+
+
+<p>Ahhoz, hogy minden felhasználónak tudjunk mutatni egy egyedi profilképet, a következő eszközt fogjuk használni: <a href="http://unicornify.appspot.com/use-it">http://unicornify.appspot.com/use-it</a>.</p>
+
+<p>A linkre kattintva ki tudjuk próbálni, hogy hogyan működik, illetve le van írva, hogy mi kell a használatához. Az alapvető koncepció az, hogy az adott felhasználó e-mail címe alapján generálódik egy egyedi unikornisos kép, aminek még szabadon megadhatjuk a méretét is bizonyos keretek között.</p>
+
+<p>Ahhoz, hogy ezt integrálni tudjuk az alkalmazásunkba, kát dolgot kell megtennünk: egyrészt meg kell tudnunk mondani minden felhasználó e-mail címmének md5 hash értékét, másrészt pedig minden felhasználóhoz meg kell tudnunk mondani azt a linket, ahol elérhető az ő egyszarvús képe.</p>
+
+<p>Felhasználó e-mail md5 hash kiszámítása:</p>
+
+<figure class='code'><figcaption><span>app/models/user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">email_md5</span>
+</span><span class='line'>  <span class="ss">Digest</span><span class="p">:</span><span class="ss">:MD5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Az avatar link összeállítása:</p>
+
+<figure class='code'><figcaption><span>app/helpers/ideas_helper.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">IdeasHelper</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">creator_unicorn_img</span><span class="p">(</span><span class="n">idea</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">present?</span>
+</span><span class='line'>      <span class="n">image_tag</span> <span class="s2">&quot;http://unicornify.appspot.com/avatar/</span><span class="si">#{</span><span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">email_md5</span><span class="si">}</span><span class="s2">?s=</span><span class="si">#{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">alt</span><span class="p">:</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">email</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ezek után pedig nincs más dolgunk, mint a megfelelő viewkban lecserélni a felhasználó e-mail címét az avatarjára:</p>
+
+<figure class='code'><figcaption><span>app/views/ideas/index.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="vi">@ideas</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">idea</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;tr&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">title</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">creator_unicorn_img</span><span class="p">(</span><span class="n">idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Show&#39;</span><span class="p">,</span> <span class="n">idea</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">idea</span><span class="o">.</span><span class="n">created_by?</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_idea_path</span><span class="p">(</span><span class="n">idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span> <span class="n">idea</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">data</span><span class="p">:</span> <span class="p">{</span> <span class="ss">confirm</span><span class="p">:</span> <span class="s1">&#39;Are you sure?&#39;</span> <span class="p">}</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/tr&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>app/views/ideas/show.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;p&gt;</span>
+</span><span class='line'><span class="x">  &lt;b&gt;By:&lt;/b&gt;</span>
+</span><span class='line'><span class="x">  &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">creator_unicorn_img</span><span class="p">(</span><span class="vi">@idea</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Utolsó lépésként rakjuk ki a kész alkalmazásunkat a Herokura:</p>
+
+<pre><code>$ git add .
+$ git commit -m 'felhasznalok es otletek'
+$ git push heroku master
+$ heroku run rake db:migrate
+</code></pre>
+
+<p>és csodáljuk meg a nap munkájának gyümölcsét :)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+      
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/railsgirls-2014/03-22/chapter-06-stay-away-from-whats-mine/" title="Previous Post: Hatodik fejezet - Mi a helyzet a magántulajdonnal?">&laquo; Hatodik fejezet - Mi a helyzet a magántulajdonnal?</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Rails Girls -
+  <span class="credit"><a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/railsgirls-2014/javascripts/aharris.js"></script>
+
+</body>
+</html>

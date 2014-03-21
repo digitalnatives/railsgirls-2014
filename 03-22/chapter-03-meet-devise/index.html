@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Harmadik fejezet - Ismerkedjük meg a deviseszal - Rails Girls Budapest</title>
+  <meta name="author" content="Rails Girls">
+
+  
+  <meta name="description" content="Ebben a fejezetben megtapasztaljuk, hogy milyen kellemes, mikor nem kell újra feltalálnuk a spanyolviaszt. Megismerkedünk a devise nevű gemmel, és &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://digitalnatives.github.io/03-22/chapter-03-meet-devise/">
+  <link href="/railsgirls-2014/favicon.png" rel="icon">
+  <link href="/railsgirls-2014/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/railsgirls-2014/javascripts/modernizr-2.0.js"></script>
+  <script src="/railsgirls-2014/javascripts/ender.js"></script>
+  <script src="/railsgirls-2014/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/railsgirls-2014/atom.xml" rel="alternate" title="Rails Girls Budapest" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <img class="logo" src="/railsgirls-2014/images/rg-budapest.jpg" />
+  <h1><a href="/railsgirls-2014/">Rails Girls Budapest</a></h1>
+</hgroup>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Harmadik Fejezet - Ismerkedjük Meg a Deviseszal</h1>
+    
+  </header>
+
+
+
+
+
+<div class="entry-content"><p>Ebben a fejezetben megtapasztaljuk, hogy milyen kellemes, mikor nem kell újra feltalálnuk a spanyolviaszt. Megismerkedünk a devise nevű gemmel, és fel is használjuk arra, hogy az oldalunk ezentúl csak regisztrált felhasználók számára legyen elérhető. Majd mire már annyira megszerettük a gem-eket, kipróbálunk még egyet, a letter_opener-t.</p>
+
+<!-- more -->
+
+
+<h1>Devise integráció</h1>
+
+<p>Emlékezzünk vissza picit, mit csináltunk az első fejezetben! Amit ott hallottunk &lsquo;gem&rsquo;-ekről meg a &lsquo;bundle&rsquo; nevű parancsról, most azt fogjuk alkalmazni.
+Nyissuk meg a <code>Gemfile</code>-t (ami emlékezzünk csak, hogy igazából egy lista arról, milyen gem-eket használ az app), és adjuk hozzá a következő sort:</p>
+
+<pre><code>$ gem devise
+</code></pre>
+
+<p>Ezzel most megmondtuk, hogy a &lsquo;devise&rsquo;-ra is szükségünk van a jövőben.
+Utána pedig futtassuk a terminálban a következőt:</p>
+
+<pre><code>$ bundle install --without production
+</code></pre>
+
+<p>Ezzel tudjuk feltelepíteni az új csomagfüggőséget, mint az app felépítésének legelején is csináltuk.
+Ezután indítsuk újra a szerverünket (ez már csak ilyen rutin dolog itt, fejlesztés közben, időnként újraindítjuk a szervert, hogy biztos minden újítás frissüljön az oldalon).</p>
+
+<h2>1. lépés: A devise beállítása az app-ben</h2>
+
+<p>A terminálba írjuk be, hogy:</p>
+
+<pre><code>$ rails g devise:install
+</code></pre>
+
+<p>Ezzel hozzáadjuk a deviset</p>
+
+<h2>2. lépés: Konfiguráljuk!</h2>
+
+<p>Nyissuk meg a szerkesztőben a <code>config/environments/development.rb</code> fájlt, és adjuk hozzá a következő sort az <code>end</code> szó előtt:</p>
+
+<figure class='code'><figcaption><span>config/environments/development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:host</span> <span class="o">=&gt;</span> <span class="s1">&#39;localhost:3000&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Most nyissuk meg a <code>app/views/layouts/application.html.erb</code> fájlunkat, és a <code>&lt;%= yield %&gt;</code> fölé írjuk be ezt:</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">notice</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;p class=&quot;alert alert-notice&quot;&gt;</span><span class="cp">&lt;%=</span> <span class="n">notice</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">alert</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;p class=&quot;alert alert-error&quot;&gt;</span><span class="cp">&lt;%=</span> <span class="n">alert</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. lépés: Állítsuk be a User modellt</h2>
+
+<p>Generáljuk le a felhasználói modellt:</p>
+
+<pre><code>$ rails generate devise user
+</code></pre>
+
+<p>A konzolban futtasuk le a következő parancsot, ahhoz, hogy az adatbázis-szintű változások megtörténjenek:</p>
+
+<pre><code>$ rake db:migrate
+</code></pre>
+
+<h2>4. lépés: Az első felhasználó&hellip;</h2>
+
+<p>Most, hogy már mindent beállítottunk, beregisztrálhatjuk az első felhasználónkat! Ehhez biztos-ami-biztos, indítsunk most megint újra a szervert, és menjünk a <a href="http://localhost:3000/users/sign_up">http://localhost:3000/users/sign_up</a> címre, majd töltsük ki a szükséges felhasználói adatokat, és kész is az első felhasználónk!</p>
+
+<h2>5. lépés: Linkek a regisztrációhoz és bejelentkezéshez</h2>
+
+<p>Szeretnénk, ha anélkül is be lehetne regisztrálni az oldalunkra, hogy mindig be kellene gépelni a <a href="http://localhost:3000/users/sign_up">http://localhost:3000/users/sign_up</a> címet, így csináljunk a navigációba linket hozzá!
+Nyissuk meg a szerkesztőben a <code>app/views/layouts/application.html.erb</code> fájlt, és a</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;ul class=&quot;nav&quot;&gt;</span>
+</span><span class='line'><span class="x">  &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;/ideas&quot;&gt;Ideas&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="x">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rész után adjuk hozzá a következőket:</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;p class=&quot;navbar-text pull-right&quot;&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user_signed_in?</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  Logged in as &lt;strong&gt;</span><span class="cp">&lt;%=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span><span class="x">&lt;/strong&gt;.</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit profile&#39;</span><span class="p">,</span> <span class="n">edit_user_registration_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span> <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Logout&quot;</span><span class="p">,</span> <span class="n">destroy_user_session_path</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">,</span> <span class="n">new_user_registration_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Login&quot;</span><span class="p">,</span> <span class="n">new_user_session_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ez azt csináltatja a programmal, amit angolul jelent a kód, de tényleg: &lsquo;link to&rsquo;, azaz csinálj linket, majd megmondja, hogy milyen néven, és hova mutasson a link.
+Végül még állítsuk be, hogy automatikusan a bejelentkező oldalra legyenek irányítva a látogatók, mielőtt bármilyen ötlethez nyúlhatnának, hogy ne tudjon csak úgy akárki randalírozni az oldalon.
+Ehhez most az <code>app/controllers/ideas_controller</code> fájlhoz hozzá kell adnunk a következő sort:</p>
+
+<figure class='code'><figcaption><span>app/controllers/ideas_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before_filter</span> <span class="ss">:authenticate_user!</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Itt a <code>before_filter</code> függvény ellenőrzi a felhasználót, hogy be van-e jelentkezve. Ezzel a függvénnyel ma még később is találkozunk majd.
+Beállíthatjuk még a jelszó hosszát a <code>config/initializers/devise.rb</code> részen, mondjuk 6-ra, csak a biztonság kedvéért.
+És készen is vagyunk! Jelentkezgessünk ki-be az oldalon, ugye milyen jó?</p>
+
+<h1>Egy másik gem</h1>
+
+<h2>Az elfelejtett jelszó problémája</h2>
+
+<p>Biztos előfordult már mindenkivel, hogy a sok regisztráció után elfelejtettük egy adott oldalra a jelszavunkat (hiába van meg a kedvenc kis jelszavunk, amit az összes oldalon használunk, itt mondjuk valamiért mást kellett megadni, amit persze el is felejtettünk azóta). Ennek a problémának a megoldására van a jelszó-emlékeztető e-mail kitalálva, ahogy biztos már sok oldalon láttuk (és használtuk) is. Amíg azonban még nem múködik tökéletesen a jelszó-emlékeztetőnk, igen idegesítő lehet állandóan e-maileket küldözgetni magunknak, amihez mindig ki-be kell jelentkezni a levelezésünkbe, ráadásul tele lesz szeméttel, stb.
+Mivel azonban a Ruby on Rails annyira jó, természetesen erre is van egy jó kis gem, a &lsquo;letter_opener_web&rsquo;. Ez azt tudja, hogy egy honlapon legenerálja nekünk a jelszó-emlékeztető levelet, így egyből láthatjuk, hogyan is nézne ki e-mailben.
+Tehát akkor az előző részben látotthoz hasonlóan adjuk a <code>letter_opener_web</code> nevű gemet is hozzá a <code>Gemfile</code>-hoz!
+Majd jöhet a szokásos terminál parancs a függőségek beállítására:</p>
+
+<pre><code>$ bundle install --without production
+</code></pre>
+
+<p>Állitsuk be az útvonalakat:</p>
+
+<figure class='code'><figcaption><span>config/routes.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">development?</span>
+</span><span class='line'>  <span class="n">mount</span> <span class="ss">LetterOpenerWeb</span><span class="p">:</span><span class="ss">:Engine</span><span class="p">,</span> <span class="ss">at</span><span class="p">:</span> <span class="s2">&quot;/letter_opener&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Majd a <code>config/environments/development.rb</code> fájlban állítsuk be az e-mail küldés formáját (magyarul: itt mondjuk meg a gem-nek, hogy ne e-mailt írjon, hanem egy honlapon jelenítse meg a levelet):</p>
+
+<figure class='code'><figcaption><span>config/environments/development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:letter_opener_web</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nézzük, mi is történt: igényeljünk egy jelszó-emlékeztetőt, majd ellenőrizzük a <a href="http://localhost:3000/letter_opener">http://localhost:3000/letter_opener</a> oldalt!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+      
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/railsgirls-2014/03-22/chapter-02-its-alive/" title="Previous Post: Második fejezet -  Hiszen ez él!">&laquo; Második fejezet -  Hiszen ez él!</a>
+      
+      
+        <a class="basic-alignment right" href="/railsgirls-2014/03-22/chapter-04-its-my-idea/" title="Next Post: Negyedik fejezet - Ötletgazdák">Negyedik fejezet - Ötletgazdák &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Rails Girls -
+  <span class="credit"><a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/railsgirls-2014/javascripts/aharris.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fejlesztői környezet kialakítása - Rails Girls Budapest</title>
+  <meta name="author" content="Rails Girls">
+
+  
+  <meta name="description" content="Bevezetés Fejlesztői környezetnek azon programok összességét nevezzük, amivel egy fejlesztő a napi munkáját sikeresen el tudja látni a számítógépén. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://digitalnatives.github.io/03-22/chapter-00-development-environment/">
+  <link href="/railsgirls-2014/favicon.png" rel="icon">
+  <link href="/railsgirls-2014/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/railsgirls-2014/javascripts/modernizr-2.0.js"></script>
+  <script src="/railsgirls-2014/javascripts/ender.js"></script>
+  <script src="/railsgirls-2014/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/railsgirls-2014/atom.xml" rel="alternate" title="Rails Girls Budapest" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <img class="logo" src="/railsgirls-2014/images/rg-budapest.jpg" />
+  <h1><a href="/railsgirls-2014/">Rails Girls Budapest</a></h1>
+</hgroup>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Fejlesztői Környezet Kialakítása</h1>
+    
+  </header>
+
+
+
+
+
+<div class="entry-content"><h1>Bevezetés</h1>
+
+<p>Fejlesztői környezetnek azon programok összességét nevezzük, amivel egy fejlesztő a napi munkáját sikeresen el tudja látni a számítógépén. Ide értjük webes fejlesztés esetén a böngészőt illetve a kód szerkesztéséhez szükséges editor-t, de része az összes olyan program, ami a megírt kód futtatásához, illetve kiszolgálásához szükséges. Ruby on Rails fejlesztéshez természetesen szükség van Ruby-ra, magára a Rails keretrendszerre, adatbázisra, webszerverre, stb. Alapesetben egy programozásban már jártas fejlesztő ezeket az eszközöket egyenként feltelepíti a környezetébe, de ez óriási munka. Ráadásul sokféle operációs rendszert használtok, sokatok Windows-on dolgozik, ahol ezeknek a telepítése még nagyobb probléma.
+A fentiek miatt kísérletképpen azt találtuk ki, hogy eltérünk a hivatalos RailsGirls folyamattól, és nem az általuk biztosított nehézkes telepítőket használjuk a gépeteken. Ehelyett egy úgynevezett virtuális számítógépet állítottunk nektek össze, amivel remélhetőleg sokkal kényelmesebben tudtok dolgozni.</p>
+
+<!-- more -->
+
+
+<h2>Virtuális számítógép</h2>
+
+<p>A <a href="http://hu.wikipedia.org/wiki/Virtu%C3%A1lis_sz%C3%A1m%C3%ADt%C3%B3g%C3%A9p">virtuális számítógép</a> egy szimulált számítógépet jelent. Lényegében egy új számítógép egy másik számítógépen belül.</p>
+
+<h1>Fejlesztői környezet telepítése</h1>
+
+<h2>Virtuális környezet</h2>
+
+<p>Összeállítottunk számotokra egy virtuális számítógépet, amire előre feltelepítettünk mindent, amire szükségetek lesz a fejlesztéshez. Az érdeklődők számára információ, hogy ez a virtuális gép amúgy egy 12.04-es verziószámű, 32 bites Linux (Ubuntu), amire nem telepítettünk semmilyen ablakkezelő felületet, mivel nem is lesz rá szükségetek. Így mindenki a saját, megszokott környezetében (operációs rendszerén) írhatja a kódot, illetve a kedvenc böngészőjét használhatja, a virtuális gépre csak a Rails-nek kiadott parancsokhoz van szükség, amit amúgy majd szintén böngészőből tudtok az egyszerűség kedvéért megtenni, de erről majd később.</p>
+
+<h3>VirtualBox</h3>
+
+<p>A VirtualBox az Oracle szoftvercég virtualicáziós platformja, amely ingyenesen letölthető mind a három általunk támogatott operációs rendszerre. A <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a> címről töltsük le az operációs rendszeretekhez illő telepítőt, és a letöltés után telepítsük az alkalmazást.</p>
+
+<h3>RailsGirls virtuális gép</h3>
+
+<p>Töltsük le <a href="http://www.digitalnatives.hu/demos/railsgirls/railsgirls_virtualbox_vm.zip">ide kattintva</a> a virtuális gépet. Letöltés után csomagoljuk ki a zip file-t egy olyan könyvtárba, amit később is megtalálunk.
+Nyissuk meg a már feltelepített VirtualBox alkalmazást. A menüben keressük meg a Machine/Add funkciót. Tallózzuk be az imént kicsomagolt könyvtárat, és válasszuk ki a vbox kiterjesztésű file-t.
+Ha minden jól ment, akkor a VirtualBox program bal oldali részén megjelent a RailsGirls nevű virtuális gép, eljött az idő, hogy elindítsuk!</p>
+
+<p><img class="center" src="/railsgirls-2014/images/chapter_00/virtualbox.png" width="600" height="600"></p>
+
+<h4>Elindítás</h4>
+
+<p>Válasszuk ki a virtuális gépet, majd nyomjunk rá a start gombra! Ha minden jól megy, akkor megjelenik egy új (csúnya fekete) ablak amiben 10-60 másodperc múlva egy <code>precise32 login:</code> felirat olvasható. Ez azt jelenti, hogy fut a virtuális gépünk!!! :) Erre az ablakra többet nem lesz szükségünk, de ne zárjuk be, mert muszáj, hogy a háttérben fusson.</p>
+
+<h4>Leállítás</h4>
+
+<p>Ha nincs szükség többet a virtuális gépre, akkor le is állíthatjuk (ezt most egyelőre ne tegyük meg). Ehhez klikkeljünk jobb egérgombbal a VirtualBox programon belül a RailsGirls virtuális gépre, és válasszuk a Close / Power Off parancsot. A virtuális gép ezek után gyakorlatilag kikapcsol, és tárhelyen kívül nem foglal erőforrást a gépen a legközelebbi elindításig.</p>
+
+<h4>Eltűnő egér</h4>
+
+<p>Ha a nem használt VirtualBox ablakba beleklikkelünk, az &ldquo;elkapja&rdquo; az egeret, és gyakorlatilag eltűnik. Az ablak jobb alsó sarkában látszik, hogy milyen billentyűt kell megnyomni az egér elengedéséhez. Mac-en ez a bal oldali command gomb, a többi operációs rendszeren pedig a jobb oldali ctrl gomb.</p>
+
+<h3>Használat</h3>
+
+<p>Most, hogy a virtuális gép már fut, jelentkezzünk be rá. A fent megjelent, nem használt virtualbox ablakból is megtehetnénk, de nagyon kényelmetlen lenne a használata (nem venné figyelembe a gépünk billentyűzetkiosztását, nem működne a copy-paste, stb-stb). Távolról is be tudnátok rá jelentkezni (úgynevezett SSH kapcsolat segítségével), de a Windows-on nincs beépített SSH kliens, a telepítése meg elég körülményes.
+A fentiek miatt megoldottuk, hogy a virtuális gépeteket el tudjátok érni a böngészőtökön keresztül! Nyissuk meg a böngészőt, és írjuk be a <a href="http://localhost:57575">http://localhost:57575</a> címet.
+Ha mindent jól csináltunk eddig, akkor a megjelenő oldalon egy pillangót láthatunk:</p>
+
+<p><img class="center" src="/railsgirls-2014/images/chapter_00/butterfly_login.png" width="600" height="600"></p>
+
+<p>Mostantól erre az ablakra konzol-ként fogunk mindenhol hivatkozni, később ide kell beírni rails-es parancsokat.</p>
+
+<h4>Copy-paste</h4>
+
+<p>Linux-on és Windows-on nem a megszokott ctrl-v billentyűzetkombinációval működik a beillesztés. Helyette a shift-insert kombinációt használjuk, az esetek többségében működik</p>
+
+<h3>Bejelentkezés</h3>
+
+<p>Jelentkezzünk be a virtuális gépbe az alábbi azonosítokkal! (A jelszó beírásakor nem jelenik meg semmi, ez ne zavarjon minket!)</p>
+
+<pre><code>login: vagrant
+password: vagrant
+</code></pre>
+
+<p>Sikeres bejelentkezés után a következő fogad minket:</p>
+
+<pre><code>vagrant@precise32:~$
+</code></pre>
+
+<p>FONTOS: akárhányszor jelentkezünk is be a fentiek szerint, bejelentkezés után mindig írjuk be a <code>/bin/bash --login</code> parancsot!!!</p>
+
+<h3>Közös könyvtár</h3>
+
+<p>Ha idáig eljutottunk, a telepítés nehezén túl vagyunk. Fut a virtuális gépünk, és gyakorlatilag előállt a fejlesztői környezet. Egy dolog van már csak hátra: meg kell osztani azt a könyvtárat a virtuális géppel, ahová a kódot írni fogjuk.
+Hozzunk létre egy railsgirls nevű könyvtárat a gépünkön (mondjuk a felhasználói fiókunk alá). Állítsuk le a virtuális gépet a már említett módon. Leállítás után jelöljük ki a gépet, majd nyomjunk a Settings gombra. Klikkeljünk a Shared Folders tab-ra, és a jobb oldali gombok közül kattintsunk a kis plusz ikonra. A megjelenő kis ablakban Folder Path-ként tallózzuk be a már létrehozott railsgirls könyvtárat, Folder Name-nek pedig a railsgirls nevet adjuk. Pipáljuk be továbbá az Auto Mount opciót (a másik két opció NE legyen bepipálva).
+Indítsuk el megint a virtuális gépet, majd nyissuk meg a konzolt böngészőben (<a href="http://localhost:57575">http://localhost:57575</a>). Jelentkezzetek be a már megismert módon (és ne felejtsétek el bejelentkezés után kiadni a <code>/bin/bash --login</code> parancsot).</p>
+
+<h4>Ellenőrzés</h4>
+
+<p>A megosztott könyvtár a virtuális gépen a /media/sf_railsgirls útvonalon található meg. Ellenőrizzük, hogy minden működik. Lépjünk először be ebbe a könyvtárba a konzolban:</p>
+
+<pre><code>$ cd /media/sf_railsgirls
+</code></pre>
+
+<p>Hozzunk létre egy üres file-t:</p>
+
+<pre><code>$ touch test.txt
+</code></pre>
+
+<p>Most nézzük meg a saját operációs rendszerünkben, hogy a megosztott könyvtárban ott van-e a <code>test.txt</code> file. Ha igen, akkor készen van a virtuális környezetünk! :)</p>
+
+<h2>Böngésző</h2>
+
+<p>Az egységes kezelhetőség szempontjából kérünk titeket, hogy telepítsétek Firefox nevű böngészőt a gépetekre. Ezt megtehetjük minden platformon a <a href="http://www.getfirefox.com">http://www.getfirefox.com</a> címen.</p>
+
+<h2>SQLite nézegető</h2>
+
+<p>Adatbázisként a gépünkön SQLite-ot fogunk használni. Hogy meg tudjuk majd nézni, hogy mit és hogy tárol az adatbázis, szükség van egy nézegetőre. Szerencsére van Firefox app erre.
+A telepítéshez Firefox alól nyissuk meg a <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src">https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src</a> címet, és kattintsunk a Download gombra.</p>
+
+<h2>Editor</h2>
+
+<p>Az editor egy nagyon okos szövegszerkesztő, amiben gyakorlatilag a webes alkalmazásunk forráskódját írjuk. Mi nagyon szeretjük a Sublime Text Editor nevű szerkesztőt, ezt a <a href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a> töltsük le, és telepítsük.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+      
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/railsgirls-2014/03-22/chapter-01-what-a-great-idea/" title="Next Post: Első fejezet - Milyen remek ötlet!">Első fejezet - Milyen remek ötlet! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Rails Girls -
+  <span class="credit"><a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/railsgirls-2014/javascripts/aharris.js"></script>
+
+</body>
+</html>

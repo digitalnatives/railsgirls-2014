@@ -1,0 +1,1197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Rails Girls Budapest]]></title>
+  <link href="http://digitalnatives.github.io/atom.xml" rel="self"/>
+  <link href="http://digitalnatives.github.io/"/>
+  <updated>2014-03-21T19:21:18+00:00</updated>
+  <id>http://digitalnatives.github.io/</id>
+  <author>
+    <name><![CDATA[Rails Girls]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fejlesztői környezet kialakítása]]></title>
+    <link href="http://digitalnatives.github.io/03-22/chapter-00-development-environment/"/>
+    <updated>2014-03-22T12:36:43+00:00</updated>
+    <id>http://digitalnatives.github.io/03-22/chapter-00-development-environment</id>
+    <content type="html"><![CDATA[<h1>Bevezetés</h1>
+
+<p>Fejlesztői környezetnek azon programok összességét nevezzük, amivel egy fejlesztő a napi munkáját sikeresen el tudja látni a számítógépén. Ide értjük webes fejlesztés esetén a böngészőt illetve a kód szerkesztéséhez szükséges editor-t, de része az összes olyan program, ami a megírt kód futtatásához, illetve kiszolgálásához szükséges. Ruby on Rails fejlesztéshez természetesen szükség van Ruby-ra, magára a Rails keretrendszerre, adatbázisra, webszerverre, stb. Alapesetben egy programozásban már jártas fejlesztő ezeket az eszközöket egyenként feltelepíti a környezetébe, de ez óriási munka. Ráadásul sokféle operációs rendszert használtok, sokatok Windows-on dolgozik, ahol ezeknek a telepítése még nagyobb probléma.
+A fentiek miatt kísérletképpen azt találtuk ki, hogy eltérünk a hivatalos RailsGirls folyamattól, és nem az általuk biztosított nehézkes telepítőket használjuk a gépeteken. Ehelyett egy úgynevezett virtuális számítógépet állítottunk nektek össze, amivel remélhetőleg sokkal kényelmesebben tudtok dolgozni.</p>
+
+<!-- more -->
+
+
+<h2>Virtuális számítógép</h2>
+
+<p>A <a href="http://hu.wikipedia.org/wiki/Virtu%C3%A1lis_sz%C3%A1m%C3%ADt%C3%B3g%C3%A9p">virtuális számítógép</a> egy szimulált számítógépet jelent. Lényegében egy új számítógép egy másik számítógépen belül.</p>
+
+<h1>Fejlesztői környezet telepítése</h1>
+
+<h2>Virtuális környezet</h2>
+
+<p>Összeállítottunk számotokra egy virtuális számítógépet, amire előre feltelepítettünk mindent, amire szükségetek lesz a fejlesztéshez. Az érdeklődők számára információ, hogy ez a virtuális gép amúgy egy 12.04-es verziószámű, 32 bites Linux (Ubuntu), amire nem telepítettünk semmilyen ablakkezelő felületet, mivel nem is lesz rá szükségetek. Így mindenki a saját, megszokott környezetében (operációs rendszerén) írhatja a kódot, illetve a kedvenc böngészőjét használhatja, a virtuális gépre csak a Rails-nek kiadott parancsokhoz van szükség, amit amúgy majd szintén böngészőből tudtok az egyszerűség kedvéért megtenni, de erről majd később.</p>
+
+<h3>VirtualBox</h3>
+
+<p>A VirtualBox az Oracle szoftvercég virtualicáziós platformja, amely ingyenesen letölthető mind a három általunk támogatott operációs rendszerre. A <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a> címről töltsük le az operációs rendszeretekhez illő telepítőt, és a letöltés után telepítsük az alkalmazást.</p>
+
+<h3>RailsGirls virtuális gép</h3>
+
+<p>Töltsük le <a href="http://www.digitalnatives.hu/demos/railsgirls/railsgirls_virtualbox_vm.zip">ide kattintva</a> a virtuális gépet. Letöltés után csomagoljuk ki a zip file-t egy olyan könyvtárba, amit később is megtalálunk.
+Nyissuk meg a már feltelepített VirtualBox alkalmazást. A menüben keressük meg a Machine/Add funkciót. Tallózzuk be az imént kicsomagolt könyvtárat, és válasszuk ki a vbox kiterjesztésű file-t.
+Ha minden jól ment, akkor a VirtualBox program bal oldali részén megjelent a RailsGirls nevű virtuális gép, eljött az idő, hogy elindítsuk!</p>
+
+<p><img class="center" src="http://digitalnatives.github.io/images/chapter_00/virtualbox.png" width="600" height="600"></p>
+
+<h4>Elindítás</h4>
+
+<p>Válasszuk ki a virtuális gépet, majd nyomjunk rá a start gombra! Ha minden jól megy, akkor megjelenik egy új (csúnya fekete) ablak amiben 10-60 másodperc múlva egy <code>precise32 login:</code> felirat olvasható. Ez azt jelenti, hogy fut a virtuális gépünk!!! :) Erre az ablakra többet nem lesz szükségünk, de ne zárjuk be, mert muszáj, hogy a háttérben fusson.</p>
+
+<h4>Leállítás</h4>
+
+<p>Ha nincs szükség többet a virtuális gépre, akkor le is állíthatjuk (ezt most egyelőre ne tegyük meg). Ehhez klikkeljünk jobb egérgombbal a VirtualBox programon belül a RailsGirls virtuális gépre, és válasszuk a Close / Power Off parancsot. A virtuális gép ezek után gyakorlatilag kikapcsol, és tárhelyen kívül nem foglal erőforrást a gépen a legközelebbi elindításig.</p>
+
+<h4>Eltűnő egér</h4>
+
+<p>Ha a nem használt VirtualBox ablakba beleklikkelünk, az &ldquo;elkapja&rdquo; az egeret, és gyakorlatilag eltűnik. Az ablak jobb alsó sarkában látszik, hogy milyen billentyűt kell megnyomni az egér elengedéséhez. Mac-en ez a bal oldali command gomb, a többi operációs rendszeren pedig a jobb oldali ctrl gomb.</p>
+
+<h3>Használat</h3>
+
+<p>Most, hogy a virtuális gép már fut, jelentkezzünk be rá. A fent megjelent, nem használt virtualbox ablakból is megtehetnénk, de nagyon kényelmetlen lenne a használata (nem venné figyelembe a gépünk billentyűzetkiosztását, nem működne a copy-paste, stb-stb). Távolról is be tudnátok rá jelentkezni (úgynevezett SSH kapcsolat segítségével), de a Windows-on nincs beépített SSH kliens, a telepítése meg elég körülményes.
+A fentiek miatt megoldottuk, hogy a virtuális gépeteket el tudjátok érni a böngészőtökön keresztül! Nyissuk meg a böngészőt, és írjuk be a <a href="http://localhost:57575">http://localhost:57575</a> címet.
+Ha mindent jól csináltunk eddig, akkor a megjelenő oldalon egy pillangót láthatunk:</p>
+
+<p><img class="center" src="http://digitalnatives.github.io/images/chapter_00/butterfly_login.png" width="600" height="600"></p>
+
+<p>Mostantól erre az ablakra konzol-ként fogunk mindenhol hivatkozni, később ide kell beírni rails-es parancsokat.</p>
+
+<h4>Copy-paste</h4>
+
+<p>Linux-on és Windows-on nem a megszokott ctrl-v billentyűzetkombinációval működik a beillesztés. Helyette a shift-insert kombinációt használjuk, az esetek többségében működik</p>
+
+<h3>Bejelentkezés</h3>
+
+<p>Jelentkezzünk be a virtuális gépbe az alábbi azonosítokkal! (A jelszó beírásakor nem jelenik meg semmi, ez ne zavarjon minket!)</p>
+
+<pre><code>login: vagrant
+password: vagrant
+</code></pre>
+
+<p>Sikeres bejelentkezés után a következő fogad minket:</p>
+
+<pre><code>vagrant@precise32:~$
+</code></pre>
+
+<p>FONTOS: akárhányszor jelentkezünk is be a fentiek szerint, bejelentkezés után mindig írjuk be a <code>/bin/bash --login</code> parancsot!!!</p>
+
+<h3>Közös könyvtár</h3>
+
+<p>Ha idáig eljutottunk, a telepítés nehezén túl vagyunk. Fut a virtuális gépünk, és gyakorlatilag előállt a fejlesztői környezet. Egy dolog van már csak hátra: meg kell osztani azt a könyvtárat a virtuális géppel, ahová a kódot írni fogjuk.
+Hozzunk létre egy railsgirls nevű könyvtárat a gépünkön (mondjuk a felhasználói fiókunk alá). Állítsuk le a virtuális gépet a már említett módon. Leállítás után jelöljük ki a gépet, majd nyomjunk a Settings gombra. Klikkeljünk a Shared Folders tab-ra, és a jobb oldali gombok közül kattintsunk a kis plusz ikonra. A megjelenő kis ablakban Folder Path-ként tallózzuk be a már létrehozott railsgirls könyvtárat, Folder Name-nek pedig a railsgirls nevet adjuk. Pipáljuk be továbbá az Auto Mount opciót (a másik két opció NE legyen bepipálva).
+Indítsuk el megint a virtuális gépet, majd nyissuk meg a konzolt böngészőben (<a href="http://localhost:57575">http://localhost:57575</a>). Jelentkezzetek be a már megismert módon (és ne felejtsétek el bejelentkezés után kiadni a <code>/bin/bash --login</code> parancsot).</p>
+
+<h4>Ellenőrzés</h4>
+
+<p>A megosztott könyvtár a virtuális gépen a /media/sf_railsgirls útvonalon található meg. Ellenőrizzük, hogy minden működik. Lépjünk először be ebbe a könyvtárba a konzolban:</p>
+
+<pre><code>$ cd /media/sf_railsgirls
+</code></pre>
+
+<p>Hozzunk létre egy üres file-t:</p>
+
+<pre><code>$ touch test.txt
+</code></pre>
+
+<p>Most nézzük meg a saját operációs rendszerünkben, hogy a megosztott könyvtárban ott van-e a <code>test.txt</code> file. Ha igen, akkor készen van a virtuális környezetünk! :)</p>
+
+<h2>Böngésző</h2>
+
+<p>Az egységes kezelhetőség szempontjából kérünk titeket, hogy telepítsétek Firefox nevű böngészőt a gépetekre. Ezt megtehetjük minden platformon a <a href="http://www.getfirefox.com">http://www.getfirefox.com</a> címen.</p>
+
+<h2>SQLite nézegető</h2>
+
+<p>Adatbázisként a gépünkön SQLite-ot fogunk használni. Hogy meg tudjuk majd nézni, hogy mit és hogy tárol az adatbázis, szükség van egy nézegetőre. Szerencsére van Firefox app erre.
+A telepítéshez Firefox alól nyissuk meg a <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src">https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src</a> címet, és kattintsunk a Download gombra.</p>
+
+<h2>Editor</h2>
+
+<p>Az editor egy nagyon okos szövegszerkesztő, amiben gyakorlatilag a webes alkalmazásunk forráskódját írjuk. Mi nagyon szeretjük a Sublime Text Editor nevű szerkesztőt, ezt a <a href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a> töltsük le, és telepítsük.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Első fejezet - Milyen remek ötlet!]]></title>
+    <link href="http://digitalnatives.github.io/03-22/chapter-01-what-a-great-idea/"/>
+    <updated>2014-03-21T08:15:28+00:00</updated>
+    <id>http://digitalnatives.github.io/03-22/chapter-01-what-a-great-idea</id>
+    <content type="html"><![CDATA[<p>Ebben a fejezetben létrehozzuk a Ruby on Rails alkalmazásunkat. Megismerjük a bundler-t (a Ruby-s világ csomagkezelőjét) és megtanuljuk, hogy kell elindítanunk a Rails szervert. Elkezdjük felépíteni az alkalmazásunkat is, a Rails úgynevezett scaffold generátorának segítségével már egy működő funkciónk lesz a fejezet végére: ötleteket hozhatunk létre, listázhatunk, törölhetünk.</p>
+
+<!-- more -->
+
+
+<h1>Bundler, gem</h1>
+
+<p>A bundler a Ruby-s világ csomagkezelője. Csomagnak, amit Ruby-ban gem-nek hívunk, egy olyan harmadik fél által fejlesztett kódkészletet nevezünk, amit hozzáadva a mi kódbázisunkhoz bővül annak funkciókészlete. Érdekesség, hogy maga a Ruby on Rails keretrendszer is egy gem. A virtuális gépetekre már előre feltelepítettük az eseményen használt legtöbb gem-et, így már a Ruby on Rails is telepítve van.
+A felhasznált gem-eknek is vannak függőségei, és ezek is használnak egyéb gem-eket. A bundler-re pontosan emiatt van szükség, ennek az eszköznek a felelőssége, hogy minden függőség a megfelelő verziószámmal kerüljön feltelepítésre.</p>
+
+<h1>Ruby on Rails</h1>
+
+<h2>Projekt létrehozás</h2>
+
+<p>Ahogy már említettük, a Ruby on Rails is egy gem. A Rails, ahogy sok másik gem is, rendelkezik egy parancssorból (konzolból) futtatható paranccsal, amivel sok mindent tudunk csinálni. Most a projektünk létrehozására fogjuk használni.</p>
+
+<p>Lépjünk be a konzolban a megosztott könyvárunkba:</p>
+
+<pre><code>$ cd /media/sf_railsgirls
+</code></pre>
+
+<p>Hozzuk létre az alkalmazásunk vázát, az alkalmazásunknak legyen a neve ideapad:</p>
+
+<pre><code>$ rails new ideapad -T --skip-bundle
+</code></pre>
+
+<p>A <code>-T</code> kapcsoló azt jelenti, hogy nem hoz létre automatikus tesztekhez környezetet (ezt most kihagyjuk, pedig izgalmas téma&hellip;), a <code>--skip-bundle</code> kapcsolóval pedig megkérjük a rails-t arra, hogy egyelőre ne futtassa a <code>bundle install</code> parancsot, amivel a csomagfüggőségeket rakja fel. Sikeres futtatás után létrejött egy új könyvtár ideapad néven, benne egy csomó előre kigenerált könyvtárral és file-lal. Ez az alkalmazásunk, ezt fogjuk tovább bővíteni. Nyissuk meg a könyvtárat gépünk operációs rendszerén az editor-ban, és nézzünk körbe: nyissuk meg a feltelepített Sublime Text Editor-t (mostantól editor-ként hivatkozunk rá), a File/Open paranccsal keressük meg a megosztott könyvtárunkban az ideapad könyvtárat, majd nyomjunk az open gombra.</p>
+
+<h2>Csomagfüggőségek, Gemfile</h2>
+
+<p>Keressük meg a Gemfile nevű file-t az editor-ban, és nyissuk meg. A Gemfile tartalmazza a projektünkben általunk használni kívánt csomagot. Láthatjátok, hogy nem hazudunk, a file-ban ott van maga a Rails gem is. Ahhoz, hogy le tudjuk futtatni a <code>bundle install</code> parancsot (amivel minden függőséget telepíteni tudunk), még hozzá kell adnunk egy gem-et (csomagot) az alkalmazásunkhoz. Adjuk hozzá a Gemfile-hoz a következő sort, majd mentsük el a file-t (ezt a későbbiekben is mindig meg kell tenni, ha arra kérünk titeket, hogy módosítsatok valamit a kódbázison):</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;therubyracer&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ha mindent jól csináltunk, elhárult az akadály, hogy feltelepíthessünk minden csomagfüggőséget. Ehhez a konzolban adjuk ki a következő parancsot:</p>
+
+<pre><code>$ bundle install
+</code></pre>
+
+<p>Ha minden jól ment, a futás végén egy ilyen szöveget láthatunk:</p>
+
+<pre><code>Your bundle is complete!
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+</code></pre>
+
+<p>Jó hírünk van! Van egy Rails alkalmazásunk, és feltelepítettük hozzá az összes függőséget, kezdhetünk kódolni! :)</p>
+
+<h2>Scaffolding</h2>
+
+<p>A scaffolding (aminek jelentése amúgy az építkezéseken használt &lsquo;állványzat&rsquo;) egy szuper jó cucc. Az MVC keretrendszerek sajátossága, arra szolgál, hogy pár alapvető tulajdonság meghatározásával a keretrendszer gyorsan, egy már működő kódot generáljon, amit tovább tudunk fejleszteni. Lássuk, hogyan is működik.</p>
+
+<p>A konzolban futtassuk le a következő parancsot:</p>
+
+<pre><code>$ rails generate scaffold Idea title:string description:text
+</code></pre>
+
+<p>Ezzel a paranccsal a következőt mondtuk meg a Rails-nek: &ldquo;generálj nekem kérlek egy olyan &lsquo;állványzatot&rsquo;, ahol ötleteket kezelhetek. Egy ötletnek két attribútuma van: title (cím), és description (leírás). Címnek string (rövid szöveg), míg a leírásnak text (hosszú szöveg) típusú értéket adhatok.&rdquo;</p>
+
+<p>A parancs kiadása után látszik, hogy milyen file-okat hozott létre a scaffold generátor. Látszik, hogy főleg az app könyvtárunk alkönyvtáraiban (model, controller és view könyvtárakban) keletkeztek file-ok.</p>
+
+<p>Létrejött továbbá a <em>db/migrate</em> könyvtár alatt is egy új file. Ez tartalmazza, hogy az adatbázisunkban létre kell hozni egy új táblát (ideas néven), amiben olyan rekordok lesznek, amiknek egy rövid szöveg típusú title-jük és egy hosszú szöveg típusú description-ük kerül eltárolásra.</p>
+
+<p>A konzolban futtasuk le a következő parancsot, ahhoz, hogy az adatbázis-szintű változások megtörténjenek:</p>
+
+<pre><code>$ rake db:migrate
+</code></pre>
+
+<h2>Rails szerver elindítása</h2>
+
+<p>Most, hogy hozzáadtunk egy új funkciót az alkalmazásunkhoz, nézzük is meg böngészőben. Ahhoz, hogy a böngészőben el tudjuk érni az alkalmazásunkat, el kell indítanunk a webszerver-t, ehhez adjuk ki a konzolban a következő parancsot:</p>
+
+<pre><code>$ rails server
+</code></pre>
+
+<p>Egy kis idő elteltével, a konzolban a következő kimenetet láthatjuk:</p>
+
+<pre><code>=&gt; Booting WEBrick
+=&gt; Rails 3.2.17 application starting in development on http://0.0.0.0:3000
+=&gt; Call with -d to detach
+=&gt; Ctrl-C to shutdown server
+[2014-03-17 11:42:49] INFO  WEBrick 1.3.1
+[2014-03-17 11:42:49] INFO  ruby 1.9.3 (2012-04-20) [i686-linux]
+[2014-03-17 11:42:49] INFO  WEBrick::HTTPServer#start: pid=1874 port=3000
+</code></pre>
+
+<p>Mindez azt jelenti, hogy fut az alkalmazásunk, nézzük is meg böngészőben. Írjuk be a <a href="http://localhost:3000/ideas">http://localhost:3000/ideas</a> címet (vagy kattintsunk a linkre). Az ötletek listaoldalára érkeztünk. Mivel nincs még egy darab ötlet sem felvéve, hozzunk létre egyet: nyomjunk a <em>New idea</em> gombra, adjunk meg címet és leírást, és mentsük el az ötletet. A listaoldara visszaérkezve már látszik is az ötletünk, amit a <em>Show</em> link segítségével megnézhetünk, az <em>Edit</em> link segítségével szerkeszthetünk, a <em>Delete</em> link segítségével pedig törölhetünk.</p>
+
+<p>Gratulálunk, készen van az első, saját funkcióval rendelkező Rails-es alkalmazásotok!</p>
+
+<h2>Alapértelmezett útvonal beállítása</h2>
+
+<p>Mindez szép és jó, de mit kapunk, ha nem írjuk be a <em>/ideas</em> útvonalat, hanem csak a <a href="http://localhost:3000">http://localhost:3000</a>-es címet nyitjuk meg? Amíg nem változtatjuk meg, addig a Ruby on Rails köszöntőoldala fogad minket. De mi persze megváltoztatjuk, mert jó volna, ha az ötletek listaoldalával nyílna meg az alkalmazásunk. Ehhez a következőket kell tennünk:</p>
+
+<p>Először is töröljük ki a <em>public/index.html</em> fájt, majd adjuk hozzá az alábbi sort a <em>config/routes.rb</em> fájlhoz:</p>
+
+<figure class='code'><figcaption><span>config/routes.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">root</span> <span class="ss">to</span><span class="p">:</span> <span class="s2">&quot;ideas#index&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ha minden-t jól csináltunk, akkor a <a href="http://localhost:3000">http://localhost:3000</a>-es címen már az ötletek listaoldalát látjuk!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Második fejezet -  Hiszen ez él!]]></title>
+    <link href="http://digitalnatives.github.io/03-22/chapter-02-its-alive/"/>
+    <updated>2014-03-20T08:17:10+00:00</updated>
+    <id>http://digitalnatives.github.io/03-22/chapter-02-its-alive</id>
+    <content type="html"><![CDATA[<p>Ez a fejezet két dologról fog szólni: verziókövetésről és webszerverekről.</p>
+
+<p>Azt szeretnénk, hogy a programunk egy olyan szerveren fusson, ami mindig be van kapocsolva, és lehetőleg egy állandó címen legyen elérhető.
+Szóval mire van szükségünk? egy webszerverre, ami: tárhelyet és fix címet ad az alkalmazásunknak, tudja futtatni a ruby on rails alkalmazásokat, fel lehet rá telelpíteni mindazon gem-eket, amikre az alkalmazásunkak szüksége van, ad adatbázis szolgáltatást. Ja és lehetőleg legyen ingyen:)</p>
+
+<p>A Heroku pont egy ilyen szolgáltatás (és nem ez az egyetlen). Ezen kívül még van egypár jó tulajdonsága, amiről majd később szó lesz. Most egyelőre örülünk, hogy megtaláltuk, regisztráltunk a <a href="https://id.heroku.com/login">https://id.heroku.com/login</a> oldalon, van jelszavunk.</p>
+
+<p>És most? Fel kéne másolni a programunkat a szerverre. Igen ám, de hogyan?  Git-tel!</p>
+
+<!-- more -->
+
+
+<h2>Verziókövetés</h2>
+
+<p>A verziókövetés azt jelenti, egymás utáni mentések készülnek ugyanarról a fájlról, amik később összevethetők, sőt vissza is állíthatók. A különböző verziókat azonban nem külön-külön fájlokba mentjük, hanem a verziókövető rendszer a felhasználó számára láthatatlanul elintézi a mentést és a tárolást és a későbbi hozzáférést is.</p>
+
+<p>A verziókövető rendszereket mentésen kivül közös munka koordinálására használják. A verziókövető rendszerek ugyanis képesek arra, hogy összefésüljenek különböző változásokat, amik egy fájlon történtek. Tehát ha ketten lemásolnak egy verziókövetett fájlt, mindketten beleírnak valamit, majd verziókövetővel elmentik, akkor ezekből a mentésekből előállitható egy olyan fájl, ami mindkettőjük változtatásait tartalmazni fogja.
+A verziókövetők használata nagyon elterjedt,  és a kódok megosztásának és másolásának is kedvelt eszköze. Ugyanis ha verziókövetővel másolunk kódot, akkor később a másolatban könnyen átvehetjük a frissítéseket is, vagy probléma esetén könnyen visszaállhatunk egy régebbi, hibamentes verzióra, anélkül, hogy az egészet egy az egyben át kéne másolni, vagy kézzel kéne szemezgetni.</p>
+
+<h2>Git</h2>
+
+<p>Az egyik újabb és igen elterjedt verziókövető a Git. Arra dolgozták ki, hogy a linuxot fejlesztő többezer ember munkáját lehessen vele követni.</p>
+
+<p>A git működési terepe az úgynevezett repository, egy mappa, amiben olyan fájlok vannak, amiket lehet, hogy a gitnek követnie kell (meg ideteszi mindazon egyéb dolgokat, amik a működéséhez szükségesek).
+Hozzunk létre egy repository-t  a <em>railsgirls</em> mappánkban:</p>
+
+<pre><code>$ git init
+</code></pre>
+
+<p>Mondjuk meg a git-nek, hogy kik vagyunk és mi az email címünk. Erre azért van szükség, hogy közös munka esetén tudni lehessen, hogy melyik változtatást ki csinálta.</p>
+
+<pre><code>git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+</code></pre>
+
+<h3>Mentés</h3>
+
+<p>A gitben a mentés 2 lépésben működik. Először meg kell mondanunk, hogy a következő mentésnél melyik fájlokat akarjuk elmenteni. Ezekről a git nyilvántart egy listát, amire bármikor  fel lehet venni új elemeket (a <code>git add</code> paranccsal), vagy levenni róla valamit.  Amikor úgy érezzük, készen vagyunk a változtatásainkkal, kiadjuk a <code>git commit</code> parancsot, ekkor történik a tényleges mentés. Minden commithoz kötelezően csatolni kell egy kis leírást arról, hogy mi van az aktuális mentésünkben (ez megint csak a közös munka miatt szükséges).</p>
+
+<p>Adjuk most hozzá az összes fájlunkat az elmentendő fájlok listájához, és commitoljunk:</p>
+
+<pre><code>$ git add .
+$ git commit -m "elso commitom"
+</code></pre>
+
+<p>Egy pár hasznos parancs: a <code>git status</code> parancs megmondja, hogy mi van a mentendő fájlok listáján, mi nincs, (és ha vannak mik azok a fájlok, amiket a git egyáltalán nem is követ). A <code>git log</code> parancs kiirja az összes eddigi commitot. Mindegyikhez tartozik egy hosszú, betűkből és számokból álló egyedi azonositó (hash). A <code>git diff</code> parancs megutatja, hogy mi változott a legutóbbi commit óta. Ha pedig a <code>git diff</code> után két commitnak a hashét irjuk, akkor a két commit közti változtatásokat mutatja meg.
+COACHOK: próbáljátok ki ezeket a pranacsokat egy új commiton.</p>
+
+<h3>Közös munka, távoli repository-k</h3>
+
+<p>A git repository-k tudhatnak egymásról. Ha egy repository tud egy másikról, akkor elkérheti tőle a benne lévő fájlokat, azoknak az egész verziótörténetével együtt (<code>git clone</code>), és később a bekövetkező változtatásokat is könnyen lehívhatja (<code>git pull</code>). Sőt, ha van jogosultsága, akár saját, új commitokat visszatolhat (<code>git push</code>).
+A közös munka attól válik egyszerűvé, hogy azok a repository-k, amikben a különböző fejlesztők dolgoznak, tudnak egymásról, és a fejlesztők könnyen lekérhetik egymástól az új változásokat, amiket a git szépen összefésül nekik a saját változásaikkal (de nem kell az egészet másolni). Azt is sokszor csinálják, hogy egy szerveren fenntartanak egy központi repository-t, mindenki oda pushol, és csak onnan pullol. Ráadásul a több repository biztonsági mentésként is szolgál: ha az egyik fejlesztőnek elfüstöl a gépe, a munkája továbbra is meglesz az összes többi fejlesztő repositoryjában.</p>
+
+<p>És ezzel vissza is kanyarodhatunk: úgy fogunk másolni, hogy a Herokunk fogunk kapni egy üres repository-t, amibe be fogjuk tolni az imént elkészített, itteni repository-nk tartalmát.</p>
+
+<h2>HEROKU</h2>
+
+<p>Miért éppen a Heroku? leginkább azért, mert sokmindent megcsinál helyettünk, és főleg, mert nagyon kényelmesen kezelhető távolról. Ehhez rendelkezésre áll egy kliensprogram.</p>
+
+<p>Először is installáljuk a klienst:</p>
+
+<pre><code>$ gem install heroku
+</code></pre>
+
+<p>A heroku kliens a saját gépünkün fut, de mindenfélét el tud intézni nekünk a távoli heroku szerveren. Persze azért tudnia kell, hogy kik vagyunk, úgyhogy lépjünk be:</p>
+
+<pre><code>$ heroku login
+</code></pre>
+
+<p>Kérni fogja a regisztrációhoz szükséges emailt és jelszót, adjuk meg.</p>
+
+<h3>Egy kis előkészület</h3>
+
+<p>A Heroku szerver környezete kicsit más, mint a mi saját fejlesztői környezetünk a saját gépünkön, ezért némi változtatást kell eszközölnünk a programunkon. A <em>config/application.rb</em> fájlhoz az utolsó sor (az <code>end</code>) előtt adjuk hozzá ezt a sort:</p>
+
+<figure class='code'><figcaption><span>config/application.rb </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">initialize_on_precompile</span> <span class="o">=</span> <span class="kp">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A Gemfájlban a</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sort változtassuk meg erre:</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;sqlite3&#39;</span><span class="p">,</span> <span class="ss">group</span><span class="p">:</span> <span class="o">[</span><span class="ss">:development</span><span class="p">,</span> <span class="ss">:test</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>és adjuk hozzá ezeket a sorokat:</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:production</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;thin&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;pg&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>majd futtassuk le a konzolban:</p>
+
+<pre><code>$ bundle install --without production
+</code></pre>
+
+<p>A <code>git status</code> paranccsal megnézhetjük, hogy 3 fájl változott (az a kettő, amit szerkesztettünk, és a <em>Gemfile.lock</em>). Nagyon fontos, hogy ezeket a változtatásokat is elmentsük: ezt egyetlen sorban megtehetjük a következő paranccsal</p>
+
+<pre><code>git commit -a -m"heroku elokeszites"
+</code></pre>
+
+<h3>Másolás!</h3>
+
+<p>A heroku kliens segjtségével létrehozunk egy új, üres alkalmazást a szerveren:</p>
+
+<pre><code>$ heroku create
+</code></pre>
+
+<p>A kimenetből látszik, hogy létrejött az alkalmazás webcíme, meg egy másik cím, ami .git-re végződik. Ez a szerveren lévő repository-nak a címe, amibe a programunkat másolni fogjuk, ráadásul az itteni repository-nkból elérhető heroku becenéven.<br/>
+Most jött el az ünnepélyes pillanat, pusholunk:</p>
+
+<pre><code>git push heroku master
+</code></pre>
+
+<p>Ha nem engedne be, akkor készítsünk ssh kulcsot és töltsük fel:</p>
+
+<pre><code>$ ssh-keygen -t rsa
+$ heroku keys:add
+</code></pre>
+
+<p>A kimenetből látszik, hogy a Heroku szerver felismerte hogy ruby on rails alkalmazást töltünk be, és telepítette az összes szükséges programokat és gem-eket, sőt azt is ellenőrzi, hogy futtatható-e az alkalmazásunk.</p>
+
+<p>A későbbiekben, ha változtatunk a programon, akkor (commit után) megint bepusholhatjuk a változtatásokat.</p>
+
+<p>Már majdnem készen vagyunk. De. A git ugyan követi a fájljaink szöveges tartalmát, de az adatbázisba sajnos nem lát bele. Úgyhogy a Heroku szerveren még nem jött létre adatbázis, ott is le kell futtani a <code>rake db:migrate</code> parancsot. Szerencsére a <code>heroku run</code> parancs akármit lefuttat nekünk, amit mögé írunk:</p>
+
+<pre><code>$ heroku run rake db:migrate
+</code></pre>
+
+<p>Készen is vagyunk, meg akarjuk nyitni a programunkat böngészőben, a <code>git push</code> kimenetének a végén ott volt a link. De ha nem figyeltünk volna, a <code>heroku apps:info</code> parancsra a kliens kiírja az alkalmazásunk adatait, és ezek közt megtaláljuk az url-t, amin az alkalmazás elérhető. (Ha ezt egérrel kijelüljük, akkor a jobb egérgombbal menüből megnyitható.)
+Nézzünk körül, mindennek ugyanúgy kell működnie, mint a saját gépünkön. A heroku.com oldalon belépés után láthajuk a létrejött alkalmazást, és hogy vannak minednféle beállítási lehetőségek.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Harmadik fejezet - Ismerkedjük meg a deviseszal]]></title>
+    <link href="http://digitalnatives.github.io/03-22/chapter-03-meet-devise/"/>
+    <updated>2014-03-19T08:17:54+00:00</updated>
+    <id>http://digitalnatives.github.io/03-22/chapter-03-meet-devise</id>
+    <content type="html"><![CDATA[<p>Ebben a fejezetben megtapasztaljuk, hogy milyen kellemes, mikor nem kell újra feltalálnuk a spanyolviaszt. Megismerkedünk a devise nevű gemmel, és fel is használjuk arra, hogy az oldalunk ezentúl csak regisztrált felhasználók számára legyen elérhető. Majd mire már annyira megszerettük a gem-eket, kipróbálunk még egyet, a letter_opener-t.</p>
+
+<!-- more -->
+
+
+<h1>Devise integráció</h1>
+
+<p>Emlékezzünk vissza picit, mit csináltunk az első fejezetben! Amit ott hallottunk &lsquo;gem&rsquo;-ekről meg a &lsquo;bundle&rsquo; nevű parancsról, most azt fogjuk alkalmazni.
+Nyissuk meg a <code>Gemfile</code>-t (ami emlékezzünk csak, hogy igazából egy lista arról, milyen gem-eket használ az app), és adjuk hozzá a következő sort:</p>
+
+<pre><code>$ gem devise
+</code></pre>
+
+<p>Ezzel most megmondtuk, hogy a &lsquo;devise&rsquo;-ra is szükségünk van a jövőben.
+Utána pedig futtassuk a terminálban a következőt:</p>
+
+<pre><code>$ bundle install --without production
+</code></pre>
+
+<p>Ezzel tudjuk feltelepíteni az új csomagfüggőséget, mint az app felépítésének legelején is csináltuk.
+Ezután indítsuk újra a szerverünket (ez már csak ilyen rutin dolog itt, fejlesztés közben, időnként újraindítjuk a szervert, hogy biztos minden újítás frissüljön az oldalon).</p>
+
+<h2>1. lépés: A devise beállítása az app-ben</h2>
+
+<p>A terminálba írjuk be, hogy:</p>
+
+<pre><code>$ rails g devise:install
+</code></pre>
+
+<p>Ezzel hozzáadjuk a deviset</p>
+
+<h2>2. lépés: Konfiguráljuk!</h2>
+
+<p>Nyissuk meg a szerkesztőben a <code>config/environments/development.rb</code> fájlt, és adjuk hozzá a következő sort az <code>end</code> szó előtt:</p>
+
+<figure class='code'><figcaption><span>config/environments/development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:host</span> <span class="o">=&gt;</span> <span class="s1">&#39;localhost:3000&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Most nyissuk meg a <code>app/views/layouts/application.html.erb</code> fájlunkat, és a <code>&lt;%= yield %&gt;</code> fölé írjuk be ezt:</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">notice</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;p class=&quot;alert alert-notice&quot;&gt;</span><span class="cp">&lt;%=</span> <span class="n">notice</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">alert</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;p class=&quot;alert alert-error&quot;&gt;</span><span class="cp">&lt;%=</span> <span class="n">alert</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. lépés: Állítsuk be a User modellt</h2>
+
+<p>Generáljuk le a felhasználói modellt:</p>
+
+<pre><code>$ rails generate devise user
+</code></pre>
+
+<p>A konzolban futtasuk le a következő parancsot, ahhoz, hogy az adatbázis-szintű változások megtörténjenek:</p>
+
+<pre><code>$ rake db:migrate
+</code></pre>
+
+<h2>4. lépés: Az első felhasználó&hellip;</h2>
+
+<p>Most, hogy már mindent beállítottunk, beregisztrálhatjuk az első felhasználónkat! Ehhez biztos-ami-biztos, indítsunk most megint újra a szervert, és menjünk a <a href="http://localhost:3000/users/sign_up">http://localhost:3000/users/sign_up</a> címre, majd töltsük ki a szükséges felhasználói adatokat, és kész is az első felhasználónk!</p>
+
+<h2>5. lépés: Linkek a regisztrációhoz és bejelentkezéshez</h2>
+
+<p>Szeretnénk, ha anélkül is be lehetne regisztrálni az oldalunkra, hogy mindig be kellene gépelni a <a href="http://localhost:3000/users/sign_up">http://localhost:3000/users/sign_up</a> címet, így csináljunk a navigációba linket hozzá!
+Nyissuk meg a szerkesztőben a <code>app/views/layouts/application.html.erb</code> fájlt, és a</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;ul class=&quot;nav&quot;&gt;</span>
+</span><span class='line'><span class="x">  &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;/ideas&quot;&gt;Ideas&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="x">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rész után adjuk hozzá a következőket:</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;p class=&quot;navbar-text pull-right&quot;&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user_signed_in?</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  Logged in as &lt;strong&gt;</span><span class="cp">&lt;%=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span><span class="x">&lt;/strong&gt;.</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit profile&#39;</span><span class="p">,</span> <span class="n">edit_user_registration_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span> <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Logout&quot;</span><span class="p">,</span> <span class="n">destroy_user_session_path</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">,</span> <span class="n">new_user_registration_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Login&quot;</span><span class="p">,</span> <span class="n">new_user_session_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ez azt csináltatja a programmal, amit angolul jelent a kód, de tényleg: &lsquo;link to&rsquo;, azaz csinálj linket, majd megmondja, hogy milyen néven, és hova mutasson a link.
+Végül még állítsuk be, hogy automatikusan a bejelentkező oldalra legyenek irányítva a látogatók, mielőtt bármilyen ötlethez nyúlhatnának, hogy ne tudjon csak úgy akárki randalírozni az oldalon.
+Ehhez most az <code>app/controllers/ideas_controller</code> fájlhoz hozzá kell adnunk a következő sort:</p>
+
+<figure class='code'><figcaption><span>app/controllers/ideas_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before_filter</span> <span class="ss">:authenticate_user!</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Itt a <code>before_filter</code> függvény ellenőrzi a felhasználót, hogy be van-e jelentkezve. Ezzel a függvénnyel ma még később is találkozunk majd.
+Beállíthatjuk még a jelszó hosszát a <code>config/initializers/devise.rb</code> részen, mondjuk 6-ra, csak a biztonság kedvéért.
+És készen is vagyunk! Jelentkezgessünk ki-be az oldalon, ugye milyen jó?</p>
+
+<h1>Egy másik gem</h1>
+
+<h2>Az elfelejtett jelszó problémája</h2>
+
+<p>Biztos előfordult már mindenkivel, hogy a sok regisztráció után elfelejtettük egy adott oldalra a jelszavunkat (hiába van meg a kedvenc kis jelszavunk, amit az összes oldalon használunk, itt mondjuk valamiért mást kellett megadni, amit persze el is felejtettünk azóta). Ennek a problémának a megoldására van a jelszó-emlékeztető e-mail kitalálva, ahogy biztos már sok oldalon láttuk (és használtuk) is. Amíg azonban még nem múködik tökéletesen a jelszó-emlékeztetőnk, igen idegesítő lehet állandóan e-maileket küldözgetni magunknak, amihez mindig ki-be kell jelentkezni a levelezésünkbe, ráadásul tele lesz szeméttel, stb.
+Mivel azonban a Ruby on Rails annyira jó, természetesen erre is van egy jó kis gem, a &lsquo;letter_opener_web&rsquo;. Ez azt tudja, hogy egy honlapon legenerálja nekünk a jelszó-emlékeztető levelet, így egyből láthatjuk, hogyan is nézne ki e-mailben.
+Tehát akkor az előző részben látotthoz hasonlóan adjuk a <code>letter_opener_web</code> nevű gemet is hozzá a <code>Gemfile</code>-hoz!
+Majd jöhet a szokásos terminál parancs a függőségek beállítására:</p>
+
+<pre><code>$ bundle install --without production
+</code></pre>
+
+<p>Állitsuk be az útvonalakat:</p>
+
+<figure class='code'><figcaption><span>config/routes.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">if</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">development?</span>
+</span><span class='line'>  <span class="n">mount</span> <span class="ss">LetterOpenerWeb</span><span class="p">:</span><span class="ss">:Engine</span><span class="p">,</span> <span class="ss">at</span><span class="p">:</span> <span class="s2">&quot;/letter_opener&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Majd a <code>config/environments/development.rb</code> fájlban állítsuk be az e-mail küldés formáját (magyarul: itt mondjuk meg a gem-nek, hogy ne e-mailt írjon, hanem egy honlapon jelenítse meg a levelet):</p>
+
+<figure class='code'><figcaption><span>config/environments/development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:letter_opener_web</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nézzük, mi is történt: igényeljünk egy jelszó-emlékeztetőt, majd ellenőrizzük a <a href="http://localhost:3000/letter_opener">http://localhost:3000/letter_opener</a> oldalt!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Negyedik fejezet - Ötletgazdák]]></title>
+    <link href="http://digitalnatives.github.io/03-22/chapter-04-its-my-idea/"/>
+    <updated>2014-03-18T08:19:42+00:00</updated>
+    <id>http://digitalnatives.github.io/03-22/chapter-04-its-my-idea</id>
+    <content type="html"><![CDATA[<p>Gondoljuk csak végig, hol tart most a alkalmazásunk? Vannak felhasználóink, akik be tudnak jelentkezni, és van lehetőségük arra, hogy az ötleteiket feltöltsék a rendszerbe.
+Viszont akad egy bökkenő: jelenleg nem tudjuk megmondani, hogy melyik ötlet melyik felhasználóhoz tartozik.
+Ez a fejezet így arról fog szólni, hogy hogyan tudjuk összekötni az ötleteket az őket létrehozó felhasználókkal.</p>
+
+<!-- more -->
+
+
+<p>Ahhoz, hogy össze tudjuk kapcsolni a már meglévő entitásainkat, nem árt, ha van valamiféle elképzelésünk arról, hogy milyen formában tárolódnak az adataink.
+A számítógépes programok a működésükhöz szükséges adatokat rendszerint valamilyen <em>adatbázisban</em> tárolják: a korszerű <em>adatbázis-kezelő rendszerek</em> lehetővé teszik, hogy adatokat gyorsan tudjunk visszakeresni.
+Ebben az alkalmazásban az <em>SQLite</em> adatbázis-kezelőt használjuk. Az SQLite direkt kicsire és egyszerűre tervezett kis motor, de attól még nem szabad lebecsülni: igazi nagy programok is használják, például a Firefox böngésző is.
+De hogyan is kell elképzelni egy ilyen adatbázist? Lényegében nem több, mint táblázatok összessége, melyeknek minden sora egy úgynevezett rekord &ndash; összekapcsolódó adatok halmaza &ndash;, egy oszlopba pedig az ugyanolyan jellegű adatok kerülnek.</p>
+
+<p>Nade pontosan hogyan is néz ki ez esetünkben? Kétféleképpen is kereshetünk támpontokat.
+Egyrészt belenézhetünk a <code>db/schema.rb</code> fájlba, ez az adatbázisunk felépítését tartalmazza, részletesen leírva, hogy milyen tábláink vannak, és azoknak milyen a szerkezete, vagyis melyik oszlopnak mi a neve és a típusa.</p>
+
+<figure class='code'><figcaption><span>db/schema.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Schema</span><span class="o">.</span><span class="n">define</span><span class="p">(</span><span class="ss">:version</span> <span class="o">=&gt;</span> <span class="mi">20140310153638</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">create_table</span> <span class="s2">&quot;ideas&quot;</span><span class="p">,</span> <span class="ss">:force</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span>   <span class="s2">&quot;title&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">text</span>     <span class="s2">&quot;description&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">datetime</span> <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>  <span class="ss">:null</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">datetime</span> <span class="s2">&quot;updated_at&quot;</span><span class="p">,</span>  <span class="ss">:null</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">create_table</span> <span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="ss">:force</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span>   <span class="s2">&quot;email&quot;</span><span class="p">,</span>                  <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:null</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span>   <span class="s2">&quot;encrypted_password&quot;</span><span class="p">,</span>     <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:null</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span>   <span class="s2">&quot;reset_password_token&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">datetime</span> <span class="s2">&quot;reset_password_sent_at&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">datetime</span> <span class="s2">&quot;remember_created_at&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">integer</span>  <span class="s2">&quot;sign_in_count&quot;</span><span class="p">,</span>          <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>  <span class="ss">:null</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">datetime</span> <span class="s2">&quot;current_sign_in_at&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">datetime</span> <span class="s2">&quot;last_sign_in_at&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span>   <span class="s2">&quot;current_sign_in_ip&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">string</span>   <span class="s2">&quot;last_sign_in_ip&quot;</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">datetime</span> <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>                             <span class="ss">:null</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">datetime</span> <span class="s2">&quot;updated_at&quot;</span><span class="p">,</span>                             <span class="ss">:null</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">add_index</span> <span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;email&quot;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;index_users_on_email&quot;</span><span class="p">,</span> <span class="ss">:unique</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">add_index</span> <span class="s2">&quot;users&quot;</span><span class="p">,</span> <span class="o">[</span><span class="s2">&quot;reset_password_token&quot;</span><span class="o">]</span><span class="p">,</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;index_users_on_reset_password_token&quot;</span><span class="p">,</span> <span class="ss">:unique</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ha nem csak erre, hanem magára az adatbázis tartalmára is kíváncsiak vagyunk, akkor használhatjuk például a Mozzillához írt <em>SQLIte Manager</em> nevű modult, ez elvileg mindenkinél használatra kész (ha esetleg mégsem, az alábbi linkre kattintva telepíthető: <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src">https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src</a>).
+Kattintsunk a böngészőben kattintsunk a <em>Tools</em> menüpontra, majd ott az <em>SQLite Manager</em>-re. Ezek után kapcsolódjuk az adatbázisunkhoz: a <em>Database</em> menüpont alatt keressük és nyomjuk meg a <em>Connect Database</em> opciót, és a felugró fájlkeresőben válasszuk ki a <code>db/development.sqlite3</code> fájlt (abból a mappából kiindulva, ahol a projektünk van).</p>
+
+<p><img class="center" src="http://digitalnatives.github.io/images/chapter_04/sqlite_manager.png" width="1366" height="768"></p>
+
+<p>Amit a nézelődés során érdemes észrevenni: minden táblában találunk egy olyan oszlopot, ami valamiféle <em>id</em>-nak, úgynevezett egyedi azonosítónak van elnevezve. Ez az oszlop egész számokat tartalmaz, és azt lehet róla tudni, egy adott táblában minden rekordé garantáltan különbözik, ezzel téve lehetővé, hogy egyértelműen azonosítani tudjuk a táblázat egy-egy sorát.</p>
+
+<p>Ez fogja a kezünkbe adni a kulcsot a probléma megoldására, hogy hogyan is tudnánk összekapcsolni az ötleteket a gazdáikkal: ha az ötleteket tartalmazó táblába felveszünk egy új oszlopot, ami a hozzá tartozó felhasználó egyedi azonosítószámát tartalmazza, onnantól ha ebben vagy egy érték, akkor meg tudjuk keresni, hogy melyik felhasználó az, aki az ötletet létrehozta.</p>
+
+<p>Lényegében arra van itt szükség, hogy válztassunk az adatbázis sémán, a Rails keretein belül pegig ezt egy úgynevezett <em>migration</em> létrehozásával és futtatásával tehetjük meg.
+Generáljunk egy migrationt az alábbi paranccsal:</p>
+
+<pre><code>$ rails generate migration add_user_id_to_ideas
+</code></pre>
+
+<p>Ez létrehoz számunkra egy új fájlt a <code>db/migrate</code> mappába, ebben tudjuk megmondani, hogy szereznék egy új oszlopot hozzáadni az öleteket tároló táblához, aminek a neve <code>user_id</code>, a típusa pedig <code>integer</code>, vagyis egy egész szám.</p>
+
+<figure class='code'><figcaption><span>db/migrate/20140322ooppmm__add_user_id_to_ideas.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">AddUserIdToIdeas</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Migration</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">change</span>
+</span><span class='line'>    <span class="n">add_column</span> <span class="ss">:ideas</span><span class="p">,</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">:integer</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Majd migráljuk az adatbázist, ezzel fog valóban frissülni a séma:</p>
+
+<pre><code>$ rake db:migrate
+</code></pre>
+
+<p>Ellenőrizzük, hogy a változás valóban megtörtént-e, nézzük meg, kibővült-e a <code>db/schema.rb</code> fájl tartalma.</p>
+
+<p>Ha ezzel készen vagyunk, akkor már nincs akadálya, hogy úgymond modell oldalon is megtegyük az összeköttetést. Mint már az korábban említve volt, a Rails egy MVC keretrendszer, ennek az első betűje, M, a modell szót rövidíti. Esetünkben gondoljuk úgy a modellekre, mint egy-egy táblára az adatbázisban, megspékelve jónéhány kellemes segédfüggvénnyel, ami megkönnyíti számunkra az adatokhoz való hozzáférérést, illetve azok létrehozását, módosítását, törlését.
+Ennek remek példája, hogy ruby oldalon két modell közötti kapcsolat létrehozását előre megírt, beszédes nevű függvények segítik:</p>
+
+<figure class='code'><figcaption><span>app/models/idea.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>app/models/user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">has_many</span> <span class="ss">:ideas</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ha ilyen módon összekötjuk a két modellt, akkor mostantól bármelyik ötleten meg tudunk hívni egy <code>user</code> methódust, ami visszaadja a hozzá teratozó felhasználót, illetve bármelyik felhasználón rendelkezésre fog állni egy <code>ideas</code> methódus, ami egy tömbben visszaadja az általa létrehozott ötleteket.</p>
+
+<p>Most már azt gondolhatnánk, hogy minden rendben, összekötöttük a két modellt, akkor bizonyára mostantól minden ötletről tudni fogjuk, hogy ki hozta létre, igaz?
+Sajnos azért ennyire nem egyszerű a helyzet, hiszen az egy dolog, hogy létrehoztuk az új mezőt, ahol tárolható a létrehozó felhasználó azonosítója, de ha belegondolunk, nem állítjuk be ennek az értékét soha.
+A cél tehát most az, hogy elkapjuk az a pillanatot a kódban, mikor egy ötlet létrejön. Annyit most már tudhatunk, hogy ez azzal jár, hogy az ötletek táblája az adatbázisban egy új sorral bűvül.
+Ezzel el is érjük az MVC egy újabb betűjét, a C-t, ami a kontroller szót rövidíti. Azt mondhatjuk, hogy a kontrollerek kötik össze a felületet, amit oldalunkból látunk azzal, ami a háttérben történik, például a modellekkel is.
+Ha meg akarjuk jeleníteni a például az összes eddigi ötletet, amit csak találunk, akkor ezt kontroller szinten a megfelelő függvényhívással lekérdezzünk, és a felületen már csak meg kell jelenítenünk. Ezt például a <code>app/controllers/ideas_controller.rb</code>-ben található <code>index</code> metódus végzi:</p>
+
+<figure class='code'><figcaption><span>app/controllers/ideas_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>  <span class="vi">@ideas</span> <span class="o">=</span> <span class="no">Idea</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="c1"># index.html.erb</span>
+</span><span class='line'>    <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@ideas</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Itt láthatjuk, ahogyan a kontroller kommunikál a modellel, elkéri tőle az összes létező ötletünket az <code>Idea.all</code> hívással, majd ezt elérhetővé teszi a megjelenítési réteg -az eddig kimaradt V betű &ndash; számára. De nem csak megjelenítésben van szerepe a kontrollernek, hanem például abban is, amikor a formon keresztül létre szeretnénk hozni egy ötletet. Itt a kapcsolat iránya megfordul: a kontroller értelmezi, hogy milyen adatokat kaptunk a felületről a formon keresztül, majd ezek alapján meghívja a megfelelő modell metódust, amivel létre lehet hozni egy új ötletet.
+Ez az a pont, ahova nekünk kicsit bele kell nyúlni, a formból jövő adatokat még ki kell annyival egészíteni, hogy ki a létrehozó felhasználó.</p>
+
+<p>Egészítsük ki az ötletekért felelős controller <code>create</code> függvényét:</p>
+
+<figure class='code'><figcaption><span>app/controllers/ideas_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@idea</span> <span class="o">=</span> <span class="no">Idea</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:idea</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vi">@idea</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">current_user</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">if</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>        <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@idea</span><span class="p">,</span> <span class="ss">notice</span><span class="p">:</span> <span class="s1">&#39;Idea was successfully created.&#39;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@idea</span><span class="p">,</span> <span class="ss">status</span><span class="p">:</span> <span class="ss">:created</span><span class="p">,</span> <span class="ss">location</span><span class="p">:</span> <span class="vi">@idea</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">action</span><span class="p">:</span> <span class="s2">&quot;new&quot;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="ss">status</span><span class="p">:</span> <span class="ss">:unprocessable_entity</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A <code>@idea.user = current_user</code> sor az újonnan bekerült kódrészlet, ezzel biztosíthatjuk, hogy az éppen belejentkezett felhasználó rá is legyen mentve a létrejövő ötletre.
+Elvileg készen vagyunk, ha mostantól létrehozunk egy új ötletet az eddigi formon keresztül, és belenézünk az adatbázisba, láthatjuk, hogy az új ötlet <code>user_id</code> mezőjének értéke megegyezik az aktuális felhasználónk <code>id</code> értékével.</p>
+
+<p>Egy fontos dolog maradt még hátra: most, hogy már minden ötletről tudjuk, hogy ki a gazdája, fel is kellene ezt tüntetnük a felületen, hogy mindenkinek nyilvánvaló legyen.
+Két helyen mutatunk információkat az ötletekről, egyrészt a listaoldalon, másrészt pedig minden ötlet saját oldalán, ez a két hely tehát az, ahova be kellene szúrnunk az alkotóról valamiféle információt, például az e-mail címét.</p>
+
+<p>A lista oldalon egészítsük ki a táblázatot egy újabb oszloppal:</p>
+
+<figure class='code'><figcaption><span>app/views/ideas/index.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;table&gt;</span>
+</span><span class='line'><span class="x">  &lt;tr&gt;</span>
+</span><span class='line'><span class="x">    &lt;th&gt;Title&lt;/th&gt;</span>
+</span><span class='line'><span class="x">    &lt;th&gt;Description&lt;/th&gt;</span>
+</span><span class='line'><span class="x">    &lt;th&gt;By&lt;/th&gt;</span>
+</span><span class='line'><span class="x">    &lt;th&gt;&lt;/th&gt;</span>
+</span><span class='line'><span class="x">    &lt;th&gt;&lt;/th&gt;</span>
+</span><span class='line'><span class="x">    &lt;th&gt;&lt;/th&gt;</span>
+</span><span class='line'><span class="x">  &lt;/tr&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="vi">@ideas</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">idea</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;tr&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">title</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Show&#39;</span><span class="p">,</span> <span class="n">idea</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_idea_path</span><span class="p">(</span><span class="n">idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span> <span class="n">idea</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">data</span><span class="p">:</span> <span class="p">{</span> <span class="ss">confirm</span><span class="p">:</span> <span class="s1">&#39;Are you sure?&#39;</span> <span class="p">}</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">  &lt;/tr&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/table&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A részletes oldalon pedig hozzunk létre egy új bekezdést:</p>
+
+<figure class='code'><figcaption><span>app/views/ideas/show.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;p&gt;</span>
+</span><span class='line'><span class="x">  &lt;b&gt;By:&lt;/b&gt;</span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ha ezzel készen vagyunk, már senkinek nem vonhatja kétségbe, hogy melyik remek ötletet melyik felhasználó találta ki és töltötte fel a rendszerünkbe :)</p>
+
+<p>Hogy éles környezetben is ki tudjuk próbálni a változásokat valódi felhasználókkal, rakjuk ki ismét az alkalmazást a Herokura:</p>
+
+<pre><code>$ git add .
+$ git commit -m 'felhasznalok es otletek'
+$ git push heroku master
+$ heroku run rake db:migrate
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ötödik fejezet - De ez így picit csúnyácska még, nem?]]></title>
+    <link href="http://digitalnatives.github.io/03-22/chapter-05-it-looks-kinda-ugly/"/>
+    <updated>2014-03-17T08:20:28+00:00</updated>
+    <id>http://digitalnatives.github.io/03-22/chapter-05-it-looks-kinda-ugly</id>
+    <content type="html"><![CDATA[<h1>Dizájn &ndash; Bootstrap</h1>
+
+<p>Most, hogy működik az app, már foglalkozhatunk a külsőségekkel is kicsit. Adjunk egy kis dizájnt neki, hogy ránézésre is profi oldalunk legyen!</p>
+
+<!-- more -->
+
+
+<h2>1. lépés: állítsuk be az app kinézetét</h2>
+
+<p>Használjuk a bootstrap.min.css fájlt, hogy kicsit könnyedebb stílusú legyen az oldal. A CSS fájlok segítségével tudjuk egyszerűen és gyorsan felöltöztetni az oldalunkat akármilyen stílusúvá. Nem kell mást tennünk, mint egy fájlt (amiben van a css kódunk) belinkelni az oldalunkra, így az automatikusan onnan veszi majd a dizájnra való beállításokat.
+Nyissuk meg az <code>app/views/layouts/application.html.erb</code> fájlt a szövegszerkesztőnkben, és a</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://railsgirls.com/assets/bootstrap.css&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sort (ami az eddigi css elérési útvonala) írjuk át a következőre:</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css&quot;</span><span class="nt">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Látható, hogy a dizájn fájlt (<a href="http://railsgirls.com/assets/bootstrap.css">http://railsgirls.com/assets/bootstrap.css</a>) cseréltük le egy másikra (bootstrap.min.css). Ezeket a saját számítógépünkön is tárolhatjuk, sőt, sajátot is írhatunk, de most a gyorsabb haladás érdekében nem megyünk nagyon bele a részletekbe, hanem előre megírt stílusfájlokkal dolgozunk.
+Következő lépésként a <code>app/assets/stylesheets/application.css</code> fájlban a</p>
+
+<figure class='code'><figcaption><span>app/assets/stylesheets/application.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span> <span class="k">padding-top</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sorban írjuk át a 100px méretet 60px-re. Ez már kőkemény programozás a stílusfájlban! Annyi történt, hogy átállítottuk a lap tetején levő tér méretét 100px-ről 60px-re.
+Végül pedig töröljük az <code>app/assets/stylesheets/scaffolds.css.scss</code> fájlt, hogy az alapból beállított Rails stílust most ne használja az oldalunk.
+Frissítsük az oldalt a <a href="http://localhost:3000/ideas">http://localhost:3000/ideas</a> címen. Nem sok minden változott, de azért valami már kezd látszani (például a tetején látszik a méretváltozás).</p>
+
+<h2>2. lépés: Navigáció</h2>
+
+<p>Mivel az új ötlet hozzáadása az egyik legfontosabb funkciója az app-nek, csináljunk neki egy gombot a menüsorba, hogy mindig egyből elérjük!
+Nyissuk meg a <code>app/views/layouts/application.html.erb</code> fájlt a szerkesztőben, és a</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;active&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/ideas&quot;</span><span class="nt">&gt;</span>Ideas<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sor alá tegyük be a következőt:</p>
+
+<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;li &gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;New Idea&#39;</span><span class="p">,</span> <span class="n">new_idea_path</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ezzel gyakorlatilag annyit tettünk, hogy hozzáadtunk egy új linket az oldalunkhoz. Szinte szó szerint ezt is írtuk le a programban, csak angolul: a fájl neve, majd &lsquo;link to new idea&rsquo;.</p>
+
+<h2>3. lépés: Csinosítsuk ki az ötletlistát</h2>
+
+<p>Tegyük most már profi kinézetűvé az ötletlista oldalunkat végre! Ehhez a táblázatok helyett div-eket fogunk használni. Röviden ez azért jó nekünk, mert akkor nem egy fix, nagy táblázat van a honlapon, amit nem tudunk mozgatni és kedvünkre átszabdalni (mintha egy kész házba beköltöznénk), hanem mi építjük fel és rakjuk a helyére az összes elemet (ezek a &lsquo;div&rsquo;-ek) az oldalunkon, a nekünk megfelelő helyre.</p>
+
+<p>Nyissuk meg a <code>app/views/ideas/index.html.erb</code> fájlt a szerkesztőben, és az egészet írjuk át a következőre:</p>
+
+<figure class='code'><figcaption><span>app/views/ideas/index.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;h1&gt;Listing ideas&lt;/h1&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="vi">@ideas</span><span class="o">.</span><span class="n">in_groups_of</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">group</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;div class=&quot;row&quot;&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="n">group</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">idea</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;div class=&quot;span4&quot;&gt;</span>
+</span><span class='line'><span class="x">        </span><span class="cp">&lt;%=</span> <span class="n">image_tag</span> <span class="n">idea</span><span class="o">.</span><span class="n">picture_url</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="s1">&#39;100%&#39;</span> <span class="k">if</span> <span class="n">idea</span><span class="o">.</span><span class="n">picture</span><span class="o">.</span><span class="n">present?</span><span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">        &lt;h4&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">idea</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">idea</span> <span class="cp">%&gt;</span><span class="x">&lt;/h4&gt;</span>
+</span><span class='line'><span class="x">        </span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;/div&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/div&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Itt látható is, hogy megjelentek kis &lsquo;div&rsquo; szövegek itt-ott a programban, és pontosan ez kellett nekünk.</p>
+
+<p>Frissítsük az oldalunkat! Most már egész csinosan néz ki, hiszen az új css fájl (amit ennek a fejezetnek a legelején belinkeltünk) pont úgy volt megírva, hogy a div-eket szépen a helyére rakja.
+Most, ha a <code>New idea</code> gombra kattintunk, egyből tudunk is hozzáadni pár ötletet a listánkhoz, ami ráadásul minél tübb tartalmunk van az oldalon, annál jobban néz ki.
+Manapság az egyik fő elv a dizájnban úgyis az, hogy a tartalom a legjobb dekoráció :)</p>
+
+<h2>4. lépés: Formázzuk meg az ötlet részleteiről szóló oldalt is</h2>
+
+<p>Kattintsunk az ötlet címére, és meg tudjuk nézni a hozzá tartozó részleteket. Ez most még csak a Rails által generált scaffold-ot mutatja, úgyhogy szépítsünk rajta.</p>
+
+<p>Nyissuk meg a <code>app/views/ideas/show.html.erb</code> fájlt a szeresztőben, és írjuk át az egészet a következőre:</p>
+
+<figure class='code'><figcaption><span>app/views/ideas/show.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;p id=&quot;notice&quot;&gt;</span><span class="cp">&lt;%=</span> <span class="n">notice</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">&lt;div class=&quot;row&quot;&gt;</span>
+</span><span class='line'><span class="x">  &lt;div class=&quot;span9&quot;&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="vi">@idea</span><span class="o">.</span><span class="n">picture_url</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="s2">&quot;100%&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">picture</span><span class="o">.</span><span class="n">present?</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/div&gt;</span>
+</span><span class='line'><span class="x">  &lt;div class=&quot;span3&quot;&gt;</span>
+</span><span class='line'><span class="x">    &lt;p&gt;&lt;b&gt;Name: &lt;/b&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">    &lt;p&gt;&lt;b&gt;Description: &lt;/b&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">    &lt;p&gt;</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_idea_path</span><span class="p">(</span><span class="vi">@idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span> <span class="vi">@idea</span><span class="p">,</span> <span class="ss">confirm</span><span class="p">:</span> <span class="s1">&#39;Are you sure?&#39;</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span> <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Back&#39;</span><span class="p">,</span> <span class="n">ideas_path</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">    &lt;/p&gt;</span>
+</span><span class='line'><span class="x">  &lt;/div&gt;</span>
+</span><span class='line'><span class="x">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Itt is bekerültek most a &lsquo;div&rsquo;-ek, amiket már jól ismerünk. A css fájl pedig szépen a helyére pakolja a dolgokat.
+Frissítsük újra az oldalunkat a <a href="http://localhost:3000/ideas">http://localhost:3000/ideas</a> címen. Ugye, hogy jobb lett?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hatodik fejezet - Mi a helyzet a magántulajdonnal?]]></title>
+    <link href="http://digitalnatives.github.io/03-22/chapter-06-stay-away-from-whats-mine/"/>
+    <updated>2014-03-16T08:21:15+00:00</updated>
+    <id>http://digitalnatives.github.io/03-22/chapter-06-stay-away-from-whats-mine</id>
+    <content type="html"><![CDATA[<p>Nézzük csak, hol is tartunk most? Az alkalmazásunk szép, a felhasználók be tudnak lépni, fel tudják tölteni az ötleteiket. Kezdjük elérni azokat a célokat, amiket a nap elején kitűztünk.
+Van viszont sajnos egy apró problémánk, ami miatt a felhasználóink elég mérgesek lennének ránk, ha ez így maradna: jelenleg az összes felhasználó hozzáfér az összes ötlethez, és bárki bármit szerkeszthet, illetve törölhet. Valljuk be, azért ezt nem így képzeltük el :)</p>
+
+<p>Ebben a fejezetben lépéseket teszünk annak érdekében, hogy a felhasználók tényleg magukénak érezhessék az ötleteiket: a cél, hogy szerekeszteni és törölni mindegyik felhasználó csak az általa létrehozott ötleteket tudja majd.</p>
+
+<!-- more -->
+
+
+<p>Gondoljuk végig, mi okozza a problémánkat elsődlegesen? Az például biztos nem egészséges, hogy minden ötlethez feltétel nélkül megjelenítünk egy szerkesztéshez és egy törléshez való linket. Ezeknek a linkeknek csak akkor kellene megjelenniük, ha a az adott felasználó hozta létre az adott ötletet.
+Első lépésben tehát ha van egy ötletünk és van egy felhasználónk, el kellene tudni dönteni, hogy a felhasználó-e a látrehozó, vagy valaki más. Ez alapvetően modell szintű logika, magának az ötletnek a felelőssége, hogy tudja magáról, ki hozta őt létre. Ennek fényében írjunk egy metódust az ötlet modellen, ami megválaszolja a kérdésünk: a paraméterül kapott felhasználóról eldönti, ő volt-e a létrehozó, és ennek függvényében igaz vagy hamis értéket ad vissza.</p>
+
+<figure class='code'><figcaption><span>/app/models/idea.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">created_by?</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">user</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ha ez megvan, akkor ezt fel tudjuk használni a megfelelő view fájlokban, és az eredénye alapján el tudjuk dönteni, hogy szükség van-e a linkre, vagy sem:</p>
+
+<figure class='code'><figcaption><span>app/views/ideas/index.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="vi">@ideas</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">idea</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;tr&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">title</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Show&#39;</span><span class="p">,</span> <span class="n">idea</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">idea</span><span class="o">.</span><span class="n">created_by?</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_idea_path</span><span class="p">(</span><span class="n">idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span> <span class="n">idea</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">data</span><span class="p">:</span> <span class="p">{</span> <span class="ss">confirm</span><span class="p">:</span> <span class="s1">&#39;Are you sure?&#39;</span> <span class="p">}</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/tr&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>app/views/ideas/show.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">created_by?</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_idea_path</span><span class="p">(</span><span class="vi">@idea</span><span class="p">),</span> <span class="ss">class</span><span class="p">:</span> <span class="s2">&quot;btn btn-default btn-lg&quot;</span><span class="p">,</span> <span class="ss">role</span><span class="p">:</span> <span class="s2">&quot;button&quot;</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Most már picit megnyugodtahunk, legalább explicit módosításra és törlésre buzdító linkeket nem fog látni a felhasználó mások ötleteihez.
+De felmerül a kérdés: elég &ldquo;csak&rdquo; elrejteni a linkeket?</p>
+
+<p>Sajnos nem, egy szemfülesebb felhasználó a link nélkül is rá tud találni mások ötleteinek szerkesztés oldalára, tovább kell gondolnunk tehát a megoldást. Az ideális az volna, hogy ha a ötleteket kezelő kontroller módosítást és törlést célzó metódusai csak akkor lennének elérhetőek, ha az aktuális felhasználó hozta létre az szóban forgó ötletet.
+Megtehetjük például azt, hogy még mielótt megmutatnák az szerkesztés oldalt, leellenőrizzük a felhasználót, és ha nem jogosult szerkeszteni az ötletet, akkor nem a szerkesztés oldalra jut, hanem visszairányítjuk valamelyik olyan oldalra, amihez van jogosultsága.
+Ezt a következőképp tudjuk megvalósítani a kontrollerben:</p>
+
+<figure class='code'><figcaption><span>app/controllers/ideas_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before_filter</span> <span class="ss">:check_creator</span><span class="p">,</span> <span class="ss">only</span><span class="p">:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">check_creator</span>
+</span><span class='line'>  <span class="vi">@idea</span> <span class="o">=</span> <span class="no">Idea</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">unless</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">created_by?</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">redirect_to</span> <span class="n">root_path</span><span class="p">,</span> <span class="ss">alert</span><span class="p">:</span> <span class="s2">&quot;You cannot mess with someone else&#39;s idea!&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A <code>before_filter</code> függvény tökéletes eszköz számunkra: segítségével még az adott metódus előtt le tudjuk ellenőrizni a felhasználót, és ha nem övé az ötlet, akkor ahelyett, hogy továbbengedjük szerkeszteni vagy törölni, visszairányítjuk az ötleteket tartalmazó főoldalra egy kis üzenettel együtt, ami figyelmezteti, hogy tiltott dolgot próbált meg.
+És ezzel készen is vagyunk, most már lényegtelen, hogy a felhasználó tudja-e, milyen linken keresse az adott ötlethez tartozó szerkesztő formot, nem fog oda eljutni, ha nem övé az ötlet :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hetedik fejezet - Meseország]]></title>
+    <link href="http://digitalnatives.github.io/03-22/chapter-07-fun-with-unicorns/"/>
+    <updated>2014-03-15T08:21:40+00:00</updated>
+    <id>http://digitalnatives.github.io/03-22/chapter-07-fun-with-unicorns</id>
+    <content type="html"><![CDATA[<p>Lazításképpen a nap végére még egy apró feladatunk maradt: ez pedig az, hogy kicsit egyedibbé, könnyebben felismerhetővé tegyük a felhasználóinkat.
+A fejezet célja, hogy minden felhasználóhoz meg tudjuk jeleníteni egy egyedi képet, egy úgynevezett avatart.</p>
+
+<!-- more -->
+
+
+<p>Ahhoz, hogy minden felhasználónak tudjunk mutatni egy egyedi profilképet, a következő eszközt fogjuk használni: <a href="http://unicornify.appspot.com/use-it">http://unicornify.appspot.com/use-it</a>.</p>
+
+<p>A linkre kattintva ki tudjuk próbálni, hogy hogyan működik, illetve le van írva, hogy mi kell a használatához. Az alapvető koncepció az, hogy az adott felhasználó e-mail címe alapján generálódik egy egyedi unikornisos kép, aminek még szabadon megadhatjuk a méretét is bizonyos keretek között.</p>
+
+<p>Ahhoz, hogy ezt integrálni tudjuk az alkalmazásunkba, kát dolgot kell megtennünk: egyrészt meg kell tudnunk mondani minden felhasználó e-mail címmének md5 hash értékét, másrészt pedig minden felhasználóhoz meg kell tudnunk mondani azt a linket, ahol elérhető az ő egyszarvús képe.</p>
+
+<p>Felhasználó e-mail md5 hash kiszámítása:</p>
+
+<figure class='code'><figcaption><span>app/models/user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">email_md5</span>
+</span><span class='line'>  <span class="ss">Digest</span><span class="p">:</span><span class="ss">:MD5</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Az avatar link összeállítása:</p>
+
+<figure class='code'><figcaption><span>app/helpers/ideas_helper.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">IdeasHelper</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">creator_unicorn_img</span><span class="p">(</span><span class="n">idea</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">present?</span>
+</span><span class='line'>      <span class="n">image_tag</span> <span class="s2">&quot;http://unicornify.appspot.com/avatar/</span><span class="si">#{</span><span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">email_md5</span><span class="si">}</span><span class="s2">?s=</span><span class="si">#{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span class='line'>                <span class="ss">alt</span><span class="p">:</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">email</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ezek után pedig nincs más dolgunk, mint a megfelelő viewkban lecserélni a felhasználó e-mail címét az avatarjára:</p>
+
+<figure class='code'><figcaption><span>app/views/ideas/index.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%</span> <span class="vi">@ideas</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">idea</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;tr&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">title</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">creator_unicorn_img</span><span class="p">(</span><span class="n">idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Show&#39;</span><span class="p">,</span> <span class="n">idea</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">idea</span><span class="o">.</span><span class="n">created_by?</span><span class="p">(</span><span class="n">current_user</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_idea_path</span><span class="p">(</span><span class="n">idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span> <span class="n">idea</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">data</span><span class="p">:</span> <span class="p">{</span> <span class="ss">confirm</span><span class="p">:</span> <span class="s1">&#39;Are you sure?&#39;</span> <span class="p">}</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'><span class="x">      &lt;td&gt;&lt;/td&gt;</span>
+</span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/tr&gt;</span>
+</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>app/views/ideas/show.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;p&gt;</span>
+</span><span class='line'><span class="x">  &lt;b&gt;By:&lt;/b&gt;</span>
+</span><span class='line'><span class="x">  &lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">creator_unicorn_img</span><span class="p">(</span><span class="vi">@idea</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/td&gt;</span>
+</span><span class='line'><span class="x">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Utolsó lépésként rakjuk ki a kész alkalmazásunkat a Herokura:</p>
+
+<pre><code>$ git add .
+$ git commit -m 'felhasznalok es otletek'
+$ git push heroku master
+$ heroku run rake db:migrate
+</code></pre>
+
+<p>és csodáljuk meg a nap munkájának gyümölcsét :)</p>
+]]></content>
+  </entry>
+  
+</feed>

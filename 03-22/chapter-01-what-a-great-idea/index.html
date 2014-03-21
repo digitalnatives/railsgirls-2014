@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Első fejezet - Milyen remek ötlet! - Rails Girls Budapest</title>
+  <meta name="author" content="Rails Girls">
+
+  
+  <meta name="description" content="Ebben a fejezetben létrehozzuk a Ruby on Rails alkalmazásunkat. Megismerjük a bundler-t (a Ruby-s világ csomagkezelőjét) és megtanuljuk, hogy kell &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://digitalnatives.github.io/03-22/chapter-01-what-a-great-idea/">
+  <link href="/railsgirls-2014/favicon.png" rel="icon">
+  <link href="/railsgirls-2014/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/railsgirls-2014/javascripts/modernizr-2.0.js"></script>
+  <script src="/railsgirls-2014/javascripts/ender.js"></script>
+  <script src="/railsgirls-2014/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/railsgirls-2014/atom.xml" rel="alternate" title="Rails Girls Budapest" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <img class="logo" src="/railsgirls-2014/images/rg-budapest.jpg" />
+  <h1><a href="/railsgirls-2014/">Rails Girls Budapest</a></h1>
+</hgroup>
+
+</header>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Első Fejezet - Milyen Remek ötlet!</h1>
+    
+  </header>
+
+
+
+
+
+<div class="entry-content"><p>Ebben a fejezetben létrehozzuk a Ruby on Rails alkalmazásunkat. Megismerjük a bundler-t (a Ruby-s világ csomagkezelőjét) és megtanuljuk, hogy kell elindítanunk a Rails szervert. Elkezdjük felépíteni az alkalmazásunkat is, a Rails úgynevezett scaffold generátorának segítségével már egy működő funkciónk lesz a fejezet végére: ötleteket hozhatunk létre, listázhatunk, törölhetünk.</p>
+
+<!-- more -->
+
+
+<h1>Bundler, gem</h1>
+
+<p>A bundler a Ruby-s világ csomagkezelője. Csomagnak, amit Ruby-ban gem-nek hívunk, egy olyan harmadik fél által fejlesztett kódkészletet nevezünk, amit hozzáadva a mi kódbázisunkhoz bővül annak funkciókészlete. Érdekesség, hogy maga a Ruby on Rails keretrendszer is egy gem. A virtuális gépetekre már előre feltelepítettük az eseményen használt legtöbb gem-et, így már a Ruby on Rails is telepítve van.
+A felhasznált gem-eknek is vannak függőségei, és ezek is használnak egyéb gem-eket. A bundler-re pontosan emiatt van szükség, ennek az eszköznek a felelőssége, hogy minden függőség a megfelelő verziószámmal kerüljön feltelepítésre.</p>
+
+<h1>Ruby on Rails</h1>
+
+<h2>Projekt létrehozás</h2>
+
+<p>Ahogy már említettük, a Ruby on Rails is egy gem. A Rails, ahogy sok másik gem is, rendelkezik egy parancssorból (konzolból) futtatható paranccsal, amivel sok mindent tudunk csinálni. Most a projektünk létrehozására fogjuk használni.</p>
+
+<p>Lépjünk be a konzolban a megosztott könyvárunkba:</p>
+
+<pre><code>$ cd /media/sf_railsgirls
+</code></pre>
+
+<p>Hozzuk létre az alkalmazásunk vázát, az alkalmazásunknak legyen a neve ideapad:</p>
+
+<pre><code>$ rails new ideapad -T --skip-bundle
+</code></pre>
+
+<p>A <code>-T</code> kapcsoló azt jelenti, hogy nem hoz létre automatikus tesztekhez környezetet (ezt most kihagyjuk, pedig izgalmas téma&hellip;), a <code>--skip-bundle</code> kapcsolóval pedig megkérjük a rails-t arra, hogy egyelőre ne futtassa a <code>bundle install</code> parancsot, amivel a csomagfüggőségeket rakja fel. Sikeres futtatás után létrejött egy új könyvtár ideapad néven, benne egy csomó előre kigenerált könyvtárral és file-lal. Ez az alkalmazásunk, ezt fogjuk tovább bővíteni. Nyissuk meg a könyvtárat gépünk operációs rendszerén az editor-ban, és nézzünk körbe: nyissuk meg a feltelepített Sublime Text Editor-t (mostantól editor-ként hivatkozunk rá), a File/Open paranccsal keressük meg a megosztott könyvtárunkban az ideapad könyvtárat, majd nyomjunk az open gombra.</p>
+
+<h2>Csomagfüggőségek, Gemfile</h2>
+
+<p>Keressük meg a Gemfile nevű file-t az editor-ban, és nyissuk meg. A Gemfile tartalmazza a projektünkben általunk használni kívánt csomagot. Láthatjátok, hogy nem hazudunk, a file-ban ott van maga a Rails gem is. Ahhoz, hogy le tudjuk futtatni a <code>bundle install</code> parancsot (amivel minden függőséget telepíteni tudunk), még hozzá kell adnunk egy gem-et (csomagot) az alkalmazásunkhoz. Adjuk hozzá a Gemfile-hoz a következő sort, majd mentsük el a file-t (ezt a későbbiekben is mindig meg kell tenni, ha arra kérünk titeket, hogy módosítsatok valamit a kódbázison):</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;therubyracer&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ha mindent jól csináltunk, elhárult az akadály, hogy feltelepíthessünk minden csomagfüggőséget. Ehhez a konzolban adjuk ki a következő parancsot:</p>
+
+<pre><code>$ bundle install
+</code></pre>
+
+<p>Ha minden jól ment, a futás végén egy ilyen szöveget láthatunk:</p>
+
+<pre><code>Your bundle is complete!
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+</code></pre>
+
+<p>Jó hírünk van! Van egy Rails alkalmazásunk, és feltelepítettük hozzá az összes függőséget, kezdhetünk kódolni! :)</p>
+
+<h2>Scaffolding</h2>
+
+<p>A scaffolding (aminek jelentése amúgy az építkezéseken használt &lsquo;állványzat&rsquo;) egy szuper jó cucc. Az MVC keretrendszerek sajátossága, arra szolgál, hogy pár alapvető tulajdonság meghatározásával a keretrendszer gyorsan, egy már működő kódot generáljon, amit tovább tudunk fejleszteni. Lássuk, hogyan is működik.</p>
+
+<p>A konzolban futtassuk le a következő parancsot:</p>
+
+<pre><code>$ rails generate scaffold Idea title:string description:text
+</code></pre>
+
+<p>Ezzel a paranccsal a következőt mondtuk meg a Rails-nek: &ldquo;generálj nekem kérlek egy olyan &lsquo;állványzatot&rsquo;, ahol ötleteket kezelhetek. Egy ötletnek két attribútuma van: title (cím), és description (leírás). Címnek string (rövid szöveg), míg a leírásnak text (hosszú szöveg) típusú értéket adhatok.&rdquo;</p>
+
+<p>A parancs kiadása után látszik, hogy milyen file-okat hozott létre a scaffold generátor. Látszik, hogy főleg az app könyvtárunk alkönyvtáraiban (model, controller és view könyvtárakban) keletkeztek file-ok.</p>
+
+<p>Létrejött továbbá a <em>db/migrate</em> könyvtár alatt is egy új file. Ez tartalmazza, hogy az adatbázisunkban létre kell hozni egy új táblát (ideas néven), amiben olyan rekordok lesznek, amiknek egy rövid szöveg típusú title-jük és egy hosszú szöveg típusú description-ük kerül eltárolásra.</p>
+
+<p>A konzolban futtasuk le a következő parancsot, ahhoz, hogy az adatbázis-szintű változások megtörténjenek:</p>
+
+<pre><code>$ rake db:migrate
+</code></pre>
+
+<h2>Rails szerver elindítása</h2>
+
+<p>Most, hogy hozzáadtunk egy új funkciót az alkalmazásunkhoz, nézzük is meg böngészőben. Ahhoz, hogy a böngészőben el tudjuk érni az alkalmazásunkat, el kell indítanunk a webszerver-t, ehhez adjuk ki a konzolban a következő parancsot:</p>
+
+<pre><code>$ rails server
+</code></pre>
+
+<p>Egy kis idő elteltével, a konzolban a következő kimenetet láthatjuk:</p>
+
+<pre><code>=&gt; Booting WEBrick
+=&gt; Rails 3.2.17 application starting in development on http://0.0.0.0:3000
+=&gt; Call with -d to detach
+=&gt; Ctrl-C to shutdown server
+[2014-03-17 11:42:49] INFO  WEBrick 1.3.1
+[2014-03-17 11:42:49] INFO  ruby 1.9.3 (2012-04-20) [i686-linux]
+[2014-03-17 11:42:49] INFO  WEBrick::HTTPServer#start: pid=1874 port=3000
+</code></pre>
+
+<p>Mindez azt jelenti, hogy fut az alkalmazásunk, nézzük is meg böngészőben. Írjuk be a <a href="http://localhost:3000/ideas">http://localhost:3000/ideas</a> címet (vagy kattintsunk a linkre). Az ötletek listaoldalára érkeztünk. Mivel nincs még egy darab ötlet sem felvéve, hozzunk létre egyet: nyomjunk a <em>New idea</em> gombra, adjunk meg címet és leírást, és mentsük el az ötletet. A listaoldara visszaérkezve már látszik is az ötletünk, amit a <em>Show</em> link segítségével megnézhetünk, az <em>Edit</em> link segítségével szerkeszthetünk, a <em>Delete</em> link segítségével pedig törölhetünk.</p>
+
+<p>Gratulálunk, készen van az első, saját funkcióval rendelkező Rails-es alkalmazásotok!</p>
+
+<h2>Alapértelmezett útvonal beállítása</h2>
+
+<p>Mindez szép és jó, de mit kapunk, ha nem írjuk be a <em>/ideas</em> útvonalat, hanem csak a <a href="http://localhost:3000">http://localhost:3000</a>-es címet nyitjuk meg? Amíg nem változtatjuk meg, addig a Ruby on Rails köszöntőoldala fogad minket. De mi persze megváltoztatjuk, mert jó volna, ha az ötletek listaoldalával nyílna meg az alkalmazásunk. Ehhez a következőket kell tennünk:</p>
+
+<p>Először is töröljük ki a <em>public/index.html</em> fájt, majd adjuk hozzá az alábbi sort a <em>config/routes.rb</em> fájlhoz:</p>
+
+<figure class='code'><figcaption><span>config/routes.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">root</span> <span class="ss">to</span><span class="p">:</span> <span class="s2">&quot;ideas#index&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ha minden-t jól csináltunk, akkor a <a href="http://localhost:3000">http://localhost:3000</a>-es címen már az ötletek listaoldalát látjuk!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+      
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/railsgirls-2014/03-22/chapter-00-development-environment/" title="Previous Post: Fejlesztői környezet kialakítása">&laquo; Fejlesztői környezet kialakítása</a>
+      
+      
+        <a class="basic-alignment right" href="/railsgirls-2014/03-22/chapter-02-its-alive/" title="Next Post: Második fejezet -  Hiszen ez él!">Második fejezet -  Hiszen ez él! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Rails Girls -
+  <span class="credit"><a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/railsgirls-2014/javascripts/aharris.js"></script>
+
+</body>
+</html>

@@ -128,7 +128,7 @@ A közös munka attól válik egyszerűvé, hogy azok a repository-k, amikben a 
 
 <h3>Egy kis előkészület</h3>
 
-<p>A Heroku szerver környezete kicsit más, mint a mi saját fejlesztői környezetünk a saját gépünkön, ezért némi változtatást kell eszközölnünk a programunkon. A <em>config/application.rb</em> fájlhoz az utolsó sor (az <code>end</code>) előtt adjuk hozzá ezt a sort:</p>
+<p>A Heroku szerver környezete kicsit más, mint a mi saját fejlesztői környezetünk a saját gépünkön, ezért némi változtatást kell eszközölnünk a programunkon. A <em>config/application.rb</em> fájlhoz az utolsó előtti sor (az <code>end</code>) előtt adjuk hozzá ezt a sort:</p>
 
 <figure class='code'><figcaption><span>config/application.rb </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">assets</span><span class="o">.</span><span class="n">initialize_on_precompile</span> <span class="o">=</span> <span class="kp">false</span>

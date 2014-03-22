@@ -65,7 +65,7 @@
 <p>Emlékezzünk vissza picit, mit csináltunk az első fejezetben! Amit ott hallottunk &lsquo;gem&rsquo;-ekről meg a &lsquo;bundle&rsquo; nevű parancsról, most azt fogjuk alkalmazni.
 Nyissuk meg a <code>Gemfile</code>-t (ami emlékezzünk csak, hogy igazából egy lista arról, milyen gem-eket használ az app), és adjuk hozzá a következő sort:</p>
 
-<pre><code>$ gem devise
+<pre><code>$ gem 'devise'
 </code></pre>
 
 <p>Ezzel most megmondtuk, hogy a &lsquo;devise&rsquo;-ra is szükségünk van a jövőben.
@@ -91,7 +91,7 @@ Ezután indítsuk újra a szerverünket (ez már csak ilyen rutin dolog itt, fej
 <p>Nyissuk meg a szerkesztőben a <code>config/environments/development.rb</code> fájlt, és adjuk hozzá a következő sort az <code>end</code> szó előtt:</p>
 
 <figure class='code'><figcaption><span>config/environments/development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:host</span> <span class="o">=&gt;</span> <span class="s1">&#39;localhost:3000&#39;</span> <span class="p">}</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;localhost:3000&#39;</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -131,18 +131,7 @@ Ezután indítsuk újra a szerverünket (ez már csak ilyen rutin dolog itt, fej
 <h2>5. lépés: Linkek a regisztrációhoz és bejelentkezéshez</h2>
 
 <p>Szeretnénk, ha anélkül is be lehetne regisztrálni az oldalunkra, hogy mindig be kellene gépelni a <a href="http://localhost:3000/users/sign_up">http://localhost:3000/users/sign_up</a> címet, így csináljunk a navigációba linket hozzá!
-Nyissuk meg a szerkesztőben a <code>app/views/layouts/application.html.erb</code> fájlt, és a</p>
-
-<figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;ul class=&quot;nav&quot;&gt;</span>
-</span><span class='line'><span class="x">  &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;/ideas&quot;&gt;Ideas&lt;/a&gt;&lt;/li&gt;</span>
-</span><span class='line'><span class="x">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>rész után adjuk hozzá a következőket:</p>
+Nyissuk meg a szerkesztőben a <code>app/views/layouts/application.html.erb</code> fájlt, és a <body> után adjuk hozzá a következőket:</p>
 
 <figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -153,21 +142,35 @@ Nyissuk meg a szerkesztőben a <code>app/views/layouts/application.html.erb</cod
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;p class=&quot;navbar-text pull-right&quot;&gt;</span>
-</span><span class='line'><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user_signed_in?</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x">  Logged in as &lt;strong&gt;</span><span class="cp">&lt;%=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span><span class="x">&lt;/strong&gt;.</span>
-</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit profile&#39;</span><span class="p">,</span> <span class="n">edit_user_registration_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span> <span class="cp">%&gt;</span><span class="x"> |</span>
-</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Logout&quot;</span><span class="p">,</span> <span class="n">destroy_user_session_path</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">,</span> <span class="n">new_user_registration_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"> |</span>
-</span><span class='line'><span class="x">  </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Login&quot;</span><span class="p">,</span> <span class="n">new_user_session_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;div class=&quot;navbar&quot;&gt;</span>
+</span><span class='line'><span class="x">  &lt;div class=&quot;navbar-inner&quot;&gt;</span>
+</span><span class='line'><span class="x">      &lt;p class=&quot;navbar-text pull-right&quot;&gt;</span>
+</span><span class='line'><span class="x">          </span><span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">user_signed_in?</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">            Logged in as &lt;strong&gt;</span><span class="cp">&lt;%=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">email</span> <span class="cp">%&gt;</span><span class="x">&lt;/strong&gt;.</span>
+</span><span class='line'><span class="x">            </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit profile&#39;</span><span class="p">,</span> <span class="n">edit_user_registration_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span> <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">            </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Logout&quot;</span><span class="p">,</span> <span class="n">destroy_user_session_path</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">          </span><span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">            </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Sign up&quot;</span><span class="p">,</span> <span class="n">new_user_registration_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">            </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Login&quot;</span><span class="p">,</span> <span class="n">new_user_session_path</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s1">&#39;navbar-link&#39;</span>  <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">          </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">      &lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;Ideas&quot;</span><span class="p">,</span> <span class="n">ideas_path</span><span class="p">,</span> <span class="ss">class</span><span class="p">:</span> <span class="s2">&quot;brand&quot;</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">  &lt;/div&gt;</span>
+</span><span class='line'><span class="x">&lt;/div&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>Ez azt csináltatja a programmal, amit angolul jelent a kód, de tényleg: &lsquo;link to&rsquo;, azaz csinálj linket, majd megmondja, hogy milyen néven, és hova mutasson a link.
 Végül még állítsuk be, hogy automatikusan a bejelentkező oldalra legyenek irányítva a látogatók, mielőtt bármilyen ötlethez nyúlhatnának, hogy ne tudjon csak úgy akárki randalírozni az oldalon.
-Ehhez most az <code>app/controllers/ideas_controller</code> fájlhoz hozzá kell adnunk a következő sort:</p>
+Ehhez most az <code>app/controllers/ideas_controller</code> fájlban az első sor után hozzá kell adnunk a következő sort:</p>
 
 <figure class='code'><figcaption><span>app/controllers/ideas_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before_filter</span> <span class="ss">:authenticate_user!</span>
@@ -204,9 +207,14 @@ Majd jöhet a szokásos terminál parancs a függőségek beállítására:</p>
 <p>Majd a <code>config/environments/development.rb</code> fájlban állítsuk be az e-mail küldés formáját (magyarul: itt mondjuk meg a gem-nek, hogy ne e-mailt írjon, hanem egy honlapon jelenítse meg a levelet):</p>
 
 <figure class='code'><figcaption><span>config/environments/development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;localhost:3000&#39;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>elé szúrjuk be az alábbi sort</p>
+
+<figure class='code'><figcaption><span>config/environments/development.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:letter_opener_web</span>
-</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 

@@ -68,26 +68,28 @@
 Nyissuk meg az <code>app/views/layouts/application.html.erb</code> fájlt a szövegszerkesztőnkben, és a</p>
 
 <figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://railsgirls.com/assets/bootstrap.css&quot;</span><span class="nt">&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>%= stylesheet_link_tag    &quot;application&quot;, :media =&gt; &quot;all&quot; %&gt;
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>sort (ami az eddigi css elérési útvonala) írjuk át a következőre:</p>
+<p>sort után szúrjuk be az alábbit:</p>
 
 <figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css&quot;</span><span class="nt">&gt;</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>  <span class="err">&lt;</span>%= stylesheet_link_tag &quot;http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css&quot;,
+</span><span class='line'>                                                  :media =&gt; &quot;all&quot; %&gt;
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Látható, hogy a dizájn fájlt (<a href="http://railsgirls.com/assets/bootstrap.css">http://railsgirls.com/assets/bootstrap.css</a>) cseréltük le egy másikra (bootstrap.min.css). Ezeket a saját számítógépünkön is tárolhatjuk, sőt, sajátot is írhatunk, de most a gyorsabb haladás érdekében nem megyünk nagyon bele a részletekbe, hanem előre megírt stílusfájlokkal dolgozunk.
-Következő lépésként a <code>app/assets/stylesheets/application.css</code> fájlban a</p>
+<p>Ezeket a fájlokat saját számítógépünkön is tárolhatjuk, sőt, sajátot is írhatunk, de most a gyorsabb haladás érdekében nem megyünk nagyon bele a részletekbe, hanem előre megírt stílusfájlokkal dolgozunk.
+Következő lépésként a <code>app/assets/stylesheets/application.css</code> fájl végére írjuk be az alábbi sort</p>
 
 <figure class='code'><figcaption><span>app/assets/stylesheets/application.css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span> <span class="k">padding-top</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span> <span class="p">}</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">body</span> <span class="p">{</span> <span class="k">padding</span><span class="o">:</span> <span class="m">30px</span> <span class="m">20px</span> <span class="m">0</span> <span class="m">20px</span><span class="p">;</span> <span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>sorban írjuk át a 100px méretet 60px-re. Ez már kőkemény programozás a stílusfájlban! Annyi történt, hogy átállítottuk a lap tetején levő tér méretét 100px-ről 60px-re.
+<p>Ez már kőkemény programozás a stílusfájlban! Annyi történt, hogy beállítottuk a lap tetején levő tér méretét 30px-re, a jobb és bal oldalit pedig 20-20 pixelre.
 Végül pedig töröljük az <code>app/assets/stylesheets/scaffolds.css.scss</code> fájlt, hogy az alapból beállított Rails stílust most ne használja az oldalunk.
 Frissítsük az oldalt a <a href="http://localhost:3000/ideas">http://localhost:3000/ideas</a> címen. Nem sok minden változott, de azért valami már kezd látszani (például a tetején látszik a méretváltozás).</p>
 
@@ -97,14 +99,18 @@ Frissítsük az oldalt a <a href="http://localhost:3000/ideas">http://localhost:
 Nyissuk meg a <code>app/views/layouts/application.html.erb</code> fájlt a szerkesztőben, és a</p>
 
 <figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;active&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/ideas&quot;</span><span class="nt">&gt;</span>Ideas<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>%= link_to &quot;Ideas&quot;, ideas_path, class: &quot;brand&quot; %&gt;
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>sor alá tegyük be a következőt:</p>
 
 <figure class='code'><figcaption><span>app/views/layouts/application.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;li &gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;New Idea&#39;</span><span class="p">,</span> <span class="n">new_idea_path</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">  &lt;ul class=&quot;nav&quot;&gt;</span>
+</span><span class='line'><span class="x">      &lt;li &gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;New Idea&#39;</span><span class="p">,</span> <span class="n">new_idea_path</span> <span class="cp">%&gt;</span><span class="x">&lt;/li&gt;</span>
+</span><span class='line'><span class="x">  &lt;/ul&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -128,14 +134,22 @@ Nyissuk meg a <code>app/views/layouts/application.html.erb</code> fájlt a szerk
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
 </pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;h1&gt;Listing ideas&lt;/h1&gt;</span>
 </span><span class='line'><span class="cp">&lt;%</span> <span class="vi">@ideas</span><span class="o">.</span><span class="n">in_groups_of</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">group</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
 </span><span class='line'><span class="x">  &lt;div class=&quot;row&quot;&gt;</span>
 </span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="n">group</span><span class="o">.</span><span class="n">compact</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">idea</span><span class="o">|</span> <span class="cp">%&gt;</span><span class="x"></span>
 </span><span class='line'><span class="x">      &lt;div class=&quot;span4&quot;&gt;</span>
-</span><span class='line'><span class="x">        </span><span class="cp">&lt;%=</span> <span class="n">image_tag</span> <span class="n">idea</span><span class="o">.</span><span class="n">picture_url</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="s1">&#39;100%&#39;</span> <span class="k">if</span> <span class="n">idea</span><span class="o">.</span><span class="n">picture</span><span class="o">.</span><span class="n">present?</span><span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x">        &lt;h4&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">idea</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">idea</span> <span class="cp">%&gt;</span><span class="x">&lt;/h4&gt;</span>
-</span><span class='line'><span class="x">        </span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">        &lt;h4&gt;</span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">idea</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">idea</span> <span class="cp">%&gt;</span><span class="x">&lt;/h4&gt;</span>
+</span><span class='line'><span class="x">        </span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;br/&gt;</span>
+</span><span class='line'><span class="x">        &lt;em&gt;</span><span class="cp">&lt;%=</span> <span class="n">idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/em&gt;</span>
+</span><span class='line'><span class="x">        &lt;p&gt;</span>
+</span><span class='line'><span class="x">          </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_idea_path</span><span class="p">(</span><span class="n">idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"> |</span>
+</span><span class='line'><span class="x">          </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span> <span class="n">idea</span><span class="p">,</span> <span class="ss">confirm</span><span class="p">:</span> <span class="s1">&#39;Are you sure?&#39;</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">        &lt;/p&gt;</span>
 </span><span class='line'><span class="x">      &lt;/div&gt;</span>
 </span><span class='line'><span class="x">    </span><span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span><span class="x"></span>
 </span><span class='line'><span class="x">  &lt;/div&gt;</span>
@@ -167,17 +181,11 @@ Manapság az egyik fő elv a dizájnban úgyis az, hogy a tartalom a legjobb dek
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;p id=&quot;notice&quot;&gt;</span><span class="cp">&lt;%=</span> <span class="n">notice</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
-</span><span class='line'><span class="x">&lt;div class=&quot;row&quot;&gt;</span>
-</span><span class='line'><span class="x">  &lt;div class=&quot;span9&quot;&gt;</span>
-</span><span class='line'><span class="x">    </span><span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="vi">@idea</span><span class="o">.</span><span class="n">picture_url</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="s2">&quot;100%&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">picture</span><span class="o">.</span><span class="n">present?</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x">  &lt;/div&gt;</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;div class=&quot;row&quot;&gt;</span>
 </span><span class='line'><span class="x">  &lt;div class=&quot;span3&quot;&gt;</span>
-</span><span class='line'><span class="x">    &lt;p&gt;&lt;b&gt;Name: &lt;/b&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">    &lt;p&gt;&lt;b&gt;Name: &lt;/b&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">title</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
 </span><span class='line'><span class="x">    &lt;p&gt;&lt;b&gt;Description: &lt;/b&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">description</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
+</span><span class='line'><span class="x">    &lt;p&gt;&lt;b&gt;By: &lt;/b&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@idea</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:email</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x">&lt;/p&gt;</span>
 </span><span class='line'><span class="x">    &lt;p&gt;</span>
 </span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">edit_idea_path</span><span class="p">(</span><span class="vi">@idea</span><span class="p">)</span> <span class="cp">%&gt;</span><span class="x"> |</span>
 </span><span class='line'><span class="x">      </span><span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s1">&#39;Destroy&#39;</span><span class="p">,</span> <span class="vi">@idea</span><span class="p">,</span> <span class="ss">confirm</span><span class="p">:</span> <span class="s1">&#39;Are you sure?&#39;</span><span class="p">,</span> <span class="nb">method</span><span class="p">:</span> <span class="ss">:delete</span> <span class="cp">%&gt;</span><span class="x"> |</span>

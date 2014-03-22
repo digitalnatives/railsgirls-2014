@@ -1,47 +1,57 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://digitalnatives.github.io/03-22/chapter-07-fun-with-unicorns/</loc>
+        <loc>
+            http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-07-fun-with-unicorns/
+        </loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/03-22/chapter-06-stay-away-from-whats-mine/</loc>
+        <loc>
+            http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-06-stay-away-from-whats-mine/
+        </loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/03-22/chapter-05-it-looks-kinda-ugly/</loc>
+        <loc>
+            http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-05-it-looks-kinda-ugly/
+        </loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/03-22/chapter-04-its-my-idea/</loc>
+        <loc>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-04-its-my-idea/</loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/03-22/chapter-03-meet-devise/</loc>
+        <loc>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-03-meet-devise/</loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/03-22/chapter-02-its-alive/</loc>
+        <loc>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-02-its-alive/</loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/03-22/chapter-01-what-a-great-idea/</loc>
+        <loc>
+            http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-01-what-a-great-idea/
+        </loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/03-22/chapter-00-development-environment/</loc>
+        <loc>
+            http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-00-development-environment/
+        </loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/blog/archives/</loc>
+        <loc>http://digitalnatives.github.io/railsgirls-2014/blog/archives/</loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/</loc>
+        <loc>http://digitalnatives.github.io/railsgirls-2014/</loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
     <url>
-        <loc>http://digitalnatives.github.io/robots.txt</loc>
+        <loc>http://digitalnatives.github.io/railsgirls-2014/robots.txt</loc>
         <lastmod>2014-03-21T18:09:34+00:00</lastmod>
     </url>
 </urlset>

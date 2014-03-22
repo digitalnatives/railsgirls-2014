@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[Rails Girls Budapest]]></title>
-  <link href="http://digitalnatives.github.io/atom.xml" rel="self"/>
-  <link href="http://digitalnatives.github.io/"/>
-  <updated>2014-03-21T19:21:18+00:00</updated>
-  <id>http://digitalnatives.github.io/</id>
+  <link href="http://digitalnatives.github.io/railsgirls-2014/atom.xml" rel="self"/>
+  <link href="http://digitalnatives.github.io/railsgirls-2014/"/>
+  <updated>2014-03-22T08:40:41+00:00</updated>
+  <id>http://digitalnatives.github.io/railsgirls-2014/</id>
   <author>
     <name><![CDATA[Rails Girls]]></name>
     
@@ -14,9 +14,9 @@
   
   <entry>
     <title type="html"><![CDATA[Fejlesztői környezet kialakítása]]></title>
-    <link href="http://digitalnatives.github.io/03-22/chapter-00-development-environment/"/>
+    <link href="http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-00-development-environment/"/>
     <updated>2014-03-22T12:36:43+00:00</updated>
-    <id>http://digitalnatives.github.io/03-22/chapter-00-development-environment</id>
+    <id>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-00-development-environment</id>
     <content type="html"><![CDATA[<h1>Bevezetés</h1>
 
 <p>Fejlesztői környezetnek azon programok összességét nevezzük, amivel egy fejlesztő a napi munkáját sikeresen el tudja látni a számítógépén. Ide értjük webes fejlesztés esetén a böngészőt illetve a kód szerkesztéséhez szükséges editor-t, de része az összes olyan program, ami a megírt kód futtatásához, illetve kiszolgálásához szükséges. Ruby on Rails fejlesztéshez természetesen szükség van Ruby-ra, magára a Rails keretrendszerre, adatbázisra, webszerverre, stb. Alapesetben egy programozásban már jártas fejlesztő ezeket az eszközöket egyenként feltelepíti a környezetébe, de ez óriási munka. Ráadásul sokféle operációs rendszert használtok, sokatok Windows-on dolgozik, ahol ezeknek a telepítése még nagyobb probléma.
@@ -45,7 +45,7 @@ A fentiek miatt kísérletképpen azt találtuk ki, hogy eltérünk a hivatalos 
 Nyissuk meg a már feltelepített VirtualBox alkalmazást. A menüben keressük meg a Machine/Add funkciót. Tallózzuk be az imént kicsomagolt könyvtárat, és válasszuk ki a vbox kiterjesztésű file-t.
 Ha minden jól ment, akkor a VirtualBox program bal oldali részén megjelent a RailsGirls nevű virtuális gép, eljött az idő, hogy elindítsuk!</p>
 
-<p><img class="center" src="http://digitalnatives.github.io/images/chapter_00/virtualbox.png" width="600" height="600"></p>
+<p><img class="center" src="http://digitalnatives.github.io/railsgirls-2014/images/chapter_00/virtualbox.png" width="600" height="600"></p>
 
 <h4>Elindítás</h4>
 
@@ -65,7 +65,7 @@ Ha minden jól ment, akkor a VirtualBox program bal oldali részén megjelent a 
 A fentiek miatt megoldottuk, hogy a virtuális gépeteket el tudjátok érni a böngészőtökön keresztül! Nyissuk meg a böngészőt, és írjuk be a <a href="http://localhost:57575">http://localhost:57575</a> címet.
 Ha mindent jól csináltunk eddig, akkor a megjelenő oldalon egy pillangót láthatunk:</p>
 
-<p><img class="center" src="http://digitalnatives.github.io/images/chapter_00/butterfly_login.png" width="600" height="600"></p>
+<p><img class="center" src="http://digitalnatives.github.io/railsgirls-2014/images/chapter_00/butterfly_login.png" width="600" height="600"></p>
 
 <p>Mostantól erre az ablakra konzol-ként fogunk mindenhol hivatkozni, később ide kell beírni rails-es parancsokat.</p>
 
@@ -125,9 +125,9 @@ A telepítéshez Firefox alól nyissuk meg a <a href="https://addons.mozilla.org
   
   <entry>
     <title type="html"><![CDATA[Első fejezet - Milyen remek ötlet!]]></title>
-    <link href="http://digitalnatives.github.io/03-22/chapter-01-what-a-great-idea/"/>
+    <link href="http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-01-what-a-great-idea/"/>
     <updated>2014-03-21T08:15:28+00:00</updated>
-    <id>http://digitalnatives.github.io/03-22/chapter-01-what-a-great-idea</id>
+    <id>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-01-what-a-great-idea</id>
     <content type="html"><![CDATA[<p>Ebben a fejezetben létrehozzuk a Ruby on Rails alkalmazásunkat. Megismerjük a bundler-t (a Ruby-s világ csomagkezelőjét) és megtanuljuk, hogy kell elindítanunk a Rails szervert. Elkezdjük felépíteni az alkalmazásunkat is, a Rails úgynevezett scaffold generátorának segítségével már egy működő funkciónk lesz a fejezet végére: ötleteket hozhatunk létre, listázhatunk, törölhetünk.</p>
 
 <!-- more -->
@@ -237,9 +237,9 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
   
   <entry>
     <title type="html"><![CDATA[Második fejezet -  Hiszen ez él!]]></title>
-    <link href="http://digitalnatives.github.io/03-22/chapter-02-its-alive/"/>
+    <link href="http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-02-its-alive/"/>
     <updated>2014-03-20T08:17:10+00:00</updated>
-    <id>http://digitalnatives.github.io/03-22/chapter-02-its-alive</id>
+    <id>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-02-its-alive</id>
     <content type="html"><![CDATA[<p>Ez a fejezet két dologról fog szólni: verziókövetésről és webszerverekről.</p>
 
 <p>Azt szeretnénk, hogy a programunk egy olyan szerveren fusson, ami mindig be van kapocsolva, és lehetőleg egy állandó címen legyen elérhető.
@@ -392,9 +392,9 @@ Nézzünk körül, mindennek ugyanúgy kell működnie, mint a saját gépünkö
   
   <entry>
     <title type="html"><![CDATA[Harmadik fejezet - Ismerkedjük meg a deviseszal]]></title>
-    <link href="http://digitalnatives.github.io/03-22/chapter-03-meet-devise/"/>
+    <link href="http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-03-meet-devise/"/>
     <updated>2014-03-19T08:17:54+00:00</updated>
-    <id>http://digitalnatives.github.io/03-22/chapter-03-meet-devise</id>
+    <id>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-03-meet-devise</id>
     <content type="html"><![CDATA[<p>Ebben a fejezetben megtapasztaljuk, hogy milyen kellemes, mikor nem kell újra feltalálnuk a spanyolviaszt. Megismerkedünk a devise nevű gemmel, és fel is használjuk arra, hogy az oldalunk ezentúl csak regisztrált felhasználók számára legyen elérhető. Majd mire már annyira megszerettük a gem-eket, kipróbálunk még egyet, a letter_opener-t.</p>
 
 <!-- more -->
@@ -556,9 +556,9 @@ Majd jöhet a szokásos terminál parancs a függőségek beállítására:</p>
   
   <entry>
     <title type="html"><![CDATA[Negyedik fejezet - Ötletgazdák]]></title>
-    <link href="http://digitalnatives.github.io/03-22/chapter-04-its-my-idea/"/>
+    <link href="http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-04-its-my-idea/"/>
     <updated>2014-03-18T08:19:42+00:00</updated>
-    <id>http://digitalnatives.github.io/03-22/chapter-04-its-my-idea</id>
+    <id>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-04-its-my-idea</id>
     <content type="html"><![CDATA[<p>Gondoljuk csak végig, hol tart most a alkalmazásunk? Vannak felhasználóink, akik be tudnak jelentkezni, és van lehetőségük arra, hogy az ötleteiket feltöltsék a rendszerbe.
 Viszont akad egy bökkenő: jelenleg nem tudjuk megmondani, hogy melyik ötlet melyik felhasználóhoz tartozik.
 Ez a fejezet így arról fog szólni, hogy hogyan tudjuk összekötni az ötleteket az őket létrehozó felhasználókkal.</p>
@@ -636,7 +636,7 @@ Egyrészt belenézhetünk a <code>db/schema.rb</code> fájlba, ez az adatbázisu
 <p>Ha nem csak erre, hanem magára az adatbázis tartalmára is kíváncsiak vagyunk, akkor használhatjuk például a Mozzillához írt <em>SQLIte Manager</em> nevű modult, ez elvileg mindenkinél használatra kész (ha esetleg mégsem, az alábbi linkre kattintva telepíthető: <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src">https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src</a>).
 Kattintsunk a böngészőben kattintsunk a <em>Tools</em> menüpontra, majd ott az <em>SQLite Manager</em>-re. Ezek után kapcsolódjuk az adatbázisunkhoz: a <em>Database</em> menüpont alatt keressük és nyomjuk meg a <em>Connect Database</em> opciót, és a felugró fájlkeresőben válasszuk ki a <code>db/development.sqlite3</code> fájlt (abból a mappából kiindulva, ahol a projektünk van).</p>
 
-<p><img class="center" src="http://digitalnatives.github.io/images/chapter_04/sqlite_manager.png" width="1366" height="768"></p>
+<p><img class="center" src="http://digitalnatives.github.io/railsgirls-2014/images/chapter_04/sqlite_manager.png" width="1366" height="768"></p>
 
 <p>Amit a nézelődés során érdemes észrevenni: minden táblában találunk egy olyan oszlopot, ami valamiféle <em>id</em>-nak, úgynevezett egyedi azonosítónak van elnevezve. Ez az oszlop egész számokat tartalmaz, és azt lehet róla tudni, egy adott táblában minden rekordé garantáltan különbözik, ezzel téve lehetővé, hogy egyértelműen azonosítani tudjuk a táblázat egy-egy sorát.</p>
 
@@ -830,9 +830,9 @@ $ heroku run rake db:migrate
   
   <entry>
     <title type="html"><![CDATA[Ötödik fejezet - De ez így picit csúnyácska még, nem?]]></title>
-    <link href="http://digitalnatives.github.io/03-22/chapter-05-it-looks-kinda-ugly/"/>
+    <link href="http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-05-it-looks-kinda-ugly/"/>
     <updated>2014-03-17T08:20:28+00:00</updated>
-    <id>http://digitalnatives.github.io/03-22/chapter-05-it-looks-kinda-ugly</id>
+    <id>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-05-it-looks-kinda-ugly</id>
     <content type="html"><![CDATA[<h1>Dizájn &ndash; Bootstrap</h1>
 
 <p>Most, hogy működik az app, már foglalkozhatunk a külsőségekkel is kicsit. Adjunk egy kis dizájnt neki, hogy ránézésre is profi oldalunk legyen!</p>
@@ -973,9 +973,9 @@ Frissítsük újra az oldalunkat a <a href="http://localhost:3000/ideas">http://
   
   <entry>
     <title type="html"><![CDATA[Hatodik fejezet - Mi a helyzet a magántulajdonnal?]]></title>
-    <link href="http://digitalnatives.github.io/03-22/chapter-06-stay-away-from-whats-mine/"/>
+    <link href="http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-06-stay-away-from-whats-mine/"/>
     <updated>2014-03-16T08:21:15+00:00</updated>
-    <id>http://digitalnatives.github.io/03-22/chapter-06-stay-away-from-whats-mine</id>
+    <id>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-06-stay-away-from-whats-mine</id>
     <content type="html"><![CDATA[<p>Nézzük csak, hol is tartunk most? Az alkalmazásunk szép, a felhasználók be tudnak lépni, fel tudják tölteni az ötleteiket. Kezdjük elérni azokat a célokat, amiket a nap elején kitűztünk.
 Van viszont sajnos egy apró problémánk, ami miatt a felhasználóink elég mérgesek lennének ránk, ha ez így maradna: jelenleg az összes felhasználó hozzáfér az összes ötlethez, és bárki bármit szerkeszthet, illetve törölhet. Valljuk be, azért ezt nem így képzeltük el :)</p>
 
@@ -1081,9 +1081,9 @@ Ezt a következőképp tudjuk megvalósítani a kontrollerben:</p>
   
   <entry>
     <title type="html"><![CDATA[Hetedik fejezet - Meseország]]></title>
-    <link href="http://digitalnatives.github.io/03-22/chapter-07-fun-with-unicorns/"/>
+    <link href="http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-07-fun-with-unicorns/"/>
     <updated>2014-03-15T08:21:40+00:00</updated>
-    <id>http://digitalnatives.github.io/03-22/chapter-07-fun-with-unicorns</id>
+    <id>http://digitalnatives.github.io/railsgirls-2014/03-22/chapter-07-fun-with-unicorns</id>
     <content type="html"><![CDATA[<p>Lazításképpen a nap végére még egy apró feladatunk maradt: ez pedig az, hogy kicsit egyedibbé, könnyebben felismerhetővé tegyük a felhasználóinkat.
 A fejezet célja, hogy minden felhasználóhoz meg tudjuk jeleníteni egy egyedi képet, egy úgynevezett avatart.</p>
 

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://digitalnatives.github.io/sitemap.xml 
+Sitemap: http://digitalnatives.github.io/railsgirls-2014/sitemap.xml 
